@@ -5,11 +5,6 @@ SET GLOBAL general_log = 'ON';
 
 /* create database user */
 SET PASSWORD FOR 'escrapp'@'localhost' = PASSWORD ('CHANGE_M3');
-CREATE DATABASE IF NOT EXISTS escreening;
-CREATE DATABASE IF NOT EXISTS `escreening-test`;
-CREATE DATABASE IF NOT EXISTS `escreening-demo`;
-CREATE DATABASE IF NOT EXISTS `escreening-int`;
-CREATE DATABASE IF NOT EXISTS `escreening-bug`;
 
 /* These next lines eases our dev deployments but should not be used in production */
 GRANT ALL ON escreening.* TO 'escrapp'@'localhost';
