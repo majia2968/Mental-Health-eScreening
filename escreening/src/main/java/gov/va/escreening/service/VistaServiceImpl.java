@@ -611,7 +611,7 @@ public class VistaServiceImpl implements VistaService {
             }
         }
         refreshMHAIens(division, vpid, duz, appProxyName);
-        logger.info("refresh MHA IENS {}",cr);
+
         return refreshCount;
     }
 
