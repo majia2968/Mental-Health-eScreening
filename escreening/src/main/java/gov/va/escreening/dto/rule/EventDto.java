@@ -7,11 +7,6 @@ public class EventDto {
     
     Integer id;
     Integer type;
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     String name;
     
     public EventDto(Event dbEvent){

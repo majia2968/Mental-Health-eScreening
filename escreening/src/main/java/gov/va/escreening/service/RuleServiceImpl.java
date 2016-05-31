@@ -631,14 +631,7 @@ public class RuleServiceImpl implements RuleService {
     private List<EventDto> toEventDtos(List<Event> dbEvents){
         List<EventDto> eventDtos = Lists.newArrayListWithExpectedSize(dbEvents.size());
         for(Event dbEvent : dbEvents){
-            EventDto dto = new EventDto(dbEvent);
-            if(dbEvent.getEventType().getEventTypeId() == RuleConstants.EVENT_TYPE_HEALTH_FACTOR )
-            {
-                int hfId = dbEvent.getRelatedObjectId();
-                HealthFactor hf = healthFactorRepository.findOne(hfId);
-                dto.setName(String.format("%s (%s)", hf.getName(), hf.getClinicalReminder().getName()));
-            }
-            eventDtos.add(dto);
+           eventDtos.add(new EventDto(dbEvent));
         }
         return eventDtos;
     }
