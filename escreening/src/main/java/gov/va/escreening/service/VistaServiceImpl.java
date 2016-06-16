@@ -606,7 +606,8 @@ public class VistaServiceImpl implements VistaService {
                     logger.info("Set the clinical reminder's IEN to null {}", cr);
                 } else {
                     clinicalReminderRepo.delete(cr);
-                }
+                logger.info("deleted the clinical reminders not found in VistA {}", cr);
+				}
             }
         }
         refreshMHAIens(division, vpid, duz, appProxyName);
