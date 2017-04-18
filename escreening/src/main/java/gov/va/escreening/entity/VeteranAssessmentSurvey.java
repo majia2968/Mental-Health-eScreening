@@ -59,9 +59,13 @@ public class VeteranAssessmentSurvey implements Serializable {
 	private List<SurveyAttempt> surveyAttemptList;
 
 	public VeteranAssessmentSurvey() {
+		//set dateCreated to now b/c it can't be null
+		this.dateCreated = new Date();
 	}
 
 	public VeteranAssessmentSurvey(Integer veteranAssessmentSurveyId) {
+		//set dateCreated to now b/c it can't be null
+		this.dateCreated = new Date();
 		this.veteranAssessmentSurveyId = veteranAssessmentSurveyId;
 	}
 
@@ -73,6 +77,8 @@ public class VeteranAssessmentSurvey implements Serializable {
 	public VeteranAssessmentSurvey(VeteranAssessment assessment, Survey survey) {
 		this.veteranAssessment = assessment;
 		this.survey = survey;
+		//set dateCreated to now b/c it can't be null
+		this.dateCreated = new Date();
 		
 		int total = 0;
 		//find the total number of questions

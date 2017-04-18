@@ -46,10 +46,12 @@ public class MeasureType implements Serializable {
 	private List<Measure> measureList;
 
 	public MeasureType() {
+		this.dateCreated = new Date();
 	}
 
 	public MeasureType(Integer measureTypeId) {
 		this.measureTypeId = measureTypeId;
+		this.dateCreated = new Date();
 	}
 
 	public MeasureType(Integer measureTypeId, String name, Date dateCreated) {

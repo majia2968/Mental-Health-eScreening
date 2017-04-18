@@ -41,10 +41,12 @@ public class EventType implements Serializable {
     private List<Event> eventList;
 
     public EventType() {
+	this.dateCreated = new Date();
     }
 
     public EventType(Integer eventTypeId) {
         this.eventTypeId = eventTypeId;
+	this.dateCreated = new Date();
     }
 
     public EventType(Integer eventTypeId, String name, Date dateCreated) {

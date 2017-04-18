@@ -70,16 +70,19 @@ public class Template implements Serializable {
     private Date modifiedDate;
 
     public Template() {
+	this.dateCreated = new Date();
     }
 
     public Template(Integer templateId) {
         this.templateId = templateId;
+	this.dateCreated = new Date();
     }
 
     public Template(Integer templateId, String name, String description, String templateFile) {
         this.templateId = templateId;
         this.name = name;
         this.templateFile = templateFile;
+	this.dateCreated = new Date();
     }
 
     public Integer getTemplateId() {

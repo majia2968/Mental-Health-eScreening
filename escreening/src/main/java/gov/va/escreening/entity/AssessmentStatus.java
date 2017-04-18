@@ -49,10 +49,12 @@ public class AssessmentStatus implements Serializable {
     private List<VeteranAssessment> veteranAssessmentList;
 
     public AssessmentStatus() {
+	this.dateCreated = new Date();
     }
 
     public AssessmentStatus(Integer assessmentStatusId) {
         this.assessmentStatusId = assessmentStatusId;
+	this.dateCreated = new Date();
     }
 
     public AssessmentStatus(Integer assessmentStatusId, String name, Date dateCreated) {

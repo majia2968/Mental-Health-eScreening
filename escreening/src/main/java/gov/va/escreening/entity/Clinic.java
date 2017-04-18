@@ -57,15 +57,18 @@ public class Clinic implements Serializable {
     private List<ClinicProgram> clinicProgramList;
 
     public Clinic() {
+	this.dateCreated = new Date();
     }
 
     public Clinic(Integer clinicId) {
         this.clinicId = clinicId;
+	this.dateCreated = new Date();
     }
 
     public Clinic(String vistaIen, String name) {
         this.vistaIen = vistaIen;
         this.name = name;
+	this.dateCreated = new Date();
     }
 
     public Clinic(Integer clinicId, String name, Date dateCreated) {

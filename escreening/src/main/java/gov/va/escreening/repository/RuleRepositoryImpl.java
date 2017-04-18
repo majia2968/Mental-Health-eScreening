@@ -57,8 +57,8 @@ public class RuleRepositoryImpl extends AbstractHibernateRepository<Rule> implem
     
     //TODO: This and getRulesForResponses can be combined to make the process of picking rules more efficient since we know what has changed 
     private static String ASSESSMENT_RULES_QUERY_FORMAT =
-            "select distinct rule.* from rule, rule_assessment_variable, assessment_variable "
-            + "where rule_assessment_variable.rule_id = rule.rule_id "
+            "select distinct [rule].* from [rule], rule_assessment_variable, assessment_variable "
+            + "where rule_assessment_variable.rule_id = [rule].rule_id "
             + "and rule_assessment_variable.assessment_variable_id=assessment_variable.assessment_variable_id "
             + "and ( "
                 //include all rules based on custom variables

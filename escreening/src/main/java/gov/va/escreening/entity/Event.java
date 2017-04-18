@@ -66,16 +66,19 @@ public class Event implements Serializable {
         
 
     public Event() {
+	this.dateCreated = new Date();
     }
 
     public Event(Integer eventId) {
         this.eventId = eventId;
+	this.dateCreated = new Date();
     }
 
     public Event(String name, Integer relatedObjectId, EventType eventType) {
         this.name = checkNotNull(name);
         this.relatedObjectId = checkNotNull(relatedObjectId);
         this.eventType = checkNotNull(eventType);
+	this.dateCreated = new Date();
     }
 
     public Integer getEventId() {

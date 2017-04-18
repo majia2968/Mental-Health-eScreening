@@ -148,10 +148,16 @@ public class VeteranAssessment implements Serializable {
 	private long appointmentDateAndTimeAsLong;
 
 	public VeteranAssessment() {
+		//set dateCreated and dateUpdated to now b/c it can't be null
+		this.dateCreated = new Date();
+		this.dateUpdated = new Date();
 	}
 
 	public VeteranAssessment(Integer veteranAssessmentId) {
 		this.veteranAssessmentId = veteranAssessmentId;
+		//set dateCreated and dateUpdated to now b/c it can't be null
+		this.dateCreated = new Date();
+		this.dateUpdated = new Date();
 	}
 
 	public VeteranAssessment(Integer veteranAssessmentId, Date dateCreated) {

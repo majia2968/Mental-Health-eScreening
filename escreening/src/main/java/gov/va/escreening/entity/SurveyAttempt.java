@@ -52,10 +52,12 @@ public class SurveyAttempt implements Serializable {
 	private VeteranAssessmentSurvey veteranAssessmentSurvey;
 
 	public SurveyAttempt() {
+		this.dateCreated = new Date();
 	}
 
 	public SurveyAttempt(Integer surveyAttemptId) {
 		this.surveyAttemptId = surveyAttemptId;
+		this.dateCreated = new Date();
 	}
 
 	public SurveyAttempt(Integer surveyAttemptId, Date dateCreated) {

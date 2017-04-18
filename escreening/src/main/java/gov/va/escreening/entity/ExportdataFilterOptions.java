@@ -47,10 +47,12 @@ public class ExportdataFilterOptions implements Serializable {
     private Date dateCreated;
 
     public ExportdataFilterOptions() {
+	this.dateCreated = new Date();
     }
 
     public ExportdataFilterOptions(Integer exportdataFilterOptionsId) {
         this.exportdataFilterOptionsId = exportdataFilterOptionsId;
+	this.dateCreated = new Date();
     }
 
     public ExportdataFilterOptions(Integer exportdataFilterOptionsId, String name, int numDays, Date dateCreated) {

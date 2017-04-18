@@ -36,7 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author jjinn, Robin Carnow
  */
 @Entity
-@Table(name = "rule")
+@Table(name = "[rule]")
 @NamedQueries({
     @NamedQuery(name = "Rule.findAll", query = "SELECT r FROM Rule r")})
 public class Rule implements Serializable {
@@ -78,10 +78,12 @@ public class Rule implements Serializable {
     private Set<AssessmentVariable> assessmentVariables;
     
     public Rule() {
+	this.dateCreated = new Date();
     }
 
     public Rule(Integer ruleId) {
         this.ruleId = ruleId;
+	this.dateCreated = new Date();
     }
 
     public Rule(Integer ruleId, String name, String expression, Date dateCreated) {

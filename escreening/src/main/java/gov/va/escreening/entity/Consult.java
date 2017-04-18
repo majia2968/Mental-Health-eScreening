@@ -47,10 +47,12 @@ public class Consult implements Serializable {
     private List<VeteranAssessmentConsult> veteranAssessmentConsultList;
 
     public Consult() {
+	this.dateCreated = new Date();
     }
 
     public Consult(Integer consultId) {
         this.consultId = consultId;
+	this.dateCreated = new Date();
     }
 
     public Consult(Integer consultId, String name, String vistaIen, Date dateCreated) {

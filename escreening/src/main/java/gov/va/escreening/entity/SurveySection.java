@@ -44,10 +44,12 @@ public class SurveySection implements Serializable, SurveySectionBaseProperties 
 	private List<Survey> surveyList;
 
 	public SurveySection() {
+		this.dateCreated = new Date();
 	}
 
 	public SurveySection(Integer surveySectionId) {
 		this.surveySectionId = surveySectionId;
+		this.dateCreated = new Date();
 	}
 
 	public SurveySection(Integer surveySectionId, String name,
@@ -55,6 +57,10 @@ public class SurveySection implements Serializable, SurveySectionBaseProperties 
 		this.surveySectionId = surveySectionId;
 		this.name = name;
 		this.dateCreated = dateCreated;
+
+		if (this.dateCreated == null) {
+			this.dateCreated = new Date();
+		}
 	}
 
 	public Integer getSurveySectionId() {

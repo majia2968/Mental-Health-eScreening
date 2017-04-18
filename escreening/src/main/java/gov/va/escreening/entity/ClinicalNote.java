@@ -40,10 +40,12 @@ public class ClinicalNote implements Serializable {
     private Date dateCreated;
 
     public ClinicalNote() {
+	this.dateCreated = new Date();
     }
 
     public ClinicalNote(Integer clinicalNoteId) {
         this.clinicalNoteId = clinicalNoteId;
+	this.dateCreated = new Date();
     }
 
     public ClinicalNote(Integer clinicalNoteId, Date dateCreated) {

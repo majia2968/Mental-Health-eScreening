@@ -47,10 +47,12 @@ public class PersonType implements Serializable {
     private List<VeteranAssessmentAuditLog> veteranAssessmentAuditLogList;
 
     public PersonType() {
+	this.dateCreated = new Date();
     }
 
     public PersonType(Integer personTypeId) {
         this.personTypeId = personTypeId;
+	this.dateCreated = new Date();
     }
 
     public PersonType(Integer personTypeId, String name, Date dateCreated) {

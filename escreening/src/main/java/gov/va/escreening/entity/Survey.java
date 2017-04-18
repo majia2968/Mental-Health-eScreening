@@ -88,10 +88,12 @@ public class Survey implements Serializable, SurveyBaseProperties{
     private Set<Template> templates;
 
     public Survey() {
+	this.dateCreated = new Date();
     }
 
     public Survey(Integer surveyId) {
         this.surveyId = surveyId;
+	this.dateCreated = new Date();
     }
 
     public Survey(Integer surveyId, String name, Date dateCreated) {

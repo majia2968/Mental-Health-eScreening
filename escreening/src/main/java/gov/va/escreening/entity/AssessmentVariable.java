@@ -87,10 +87,12 @@ public class AssessmentVariable implements Serializable {
     private List<AssessmentFormula> assessmentFormulas;
 
     public AssessmentVariable() {
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariable(Integer assessmentVariableId) {
         this.assessmentVariableId = assessmentVariableId;
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariable(Integer assessmentVariableId, String displayName, Date dateCreated) {

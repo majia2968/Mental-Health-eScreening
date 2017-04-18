@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "user")
+@Table(name = "[user]")
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u") })
 public class User implements Serializable {
@@ -89,10 +89,12 @@ public class User implements Serializable {
     private UserStatus userStatus;
 
     public User() {
+	this.dateCreated = new Date();
     }
 
     public User(Integer userId) {
         this.userId = userId;
+	this.dateCreated = new Date();
     }
 
     public User(Integer userId, String loginId, Date dateCreated) {

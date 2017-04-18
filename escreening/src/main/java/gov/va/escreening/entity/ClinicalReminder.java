@@ -60,10 +60,12 @@ public class ClinicalReminder implements Serializable {
     private List<HealthFactor> healthFactors;
 
     public ClinicalReminder() {
+	this.dateCreated = new Date();
     }
 
     public ClinicalReminder(Integer clinicalReminderId) {
         this.clinicalReminderId = clinicalReminderId;
+	this.dateCreated = new Date();
     }
 
     public ClinicalReminder(Integer clinicalReminderId, Date dateCreated) {

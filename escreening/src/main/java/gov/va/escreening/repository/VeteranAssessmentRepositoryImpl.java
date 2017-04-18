@@ -278,7 +278,7 @@ public class VeteranAssessmentRepositoryImpl extends AbstractHibernateRepository
 
     @Override
     public Date getDateModified(int veteranAssessmentId) {
-        String sql = "SELECT UNIX_TIMESTAMP(max(date_created)), UNIX_TIMESTAMP(max(date_modified)) FROM survey_measure_response WHERE veteran_assessment_id = :veteranAssessmentId";
+        String sql = "SELECT DATEDIFF(s, '1970-01-01 00:00:00', max(date_created)) as date_created, DATEDIFF(s, '1970-01-01 00:00:00', max(date_modified)) as date_modified FROM survey_measure_response WHERE veteran_assessment_id = :veteranAssessmentId";
 
         @SuppressWarnings("unchecked")
         List<Object[]> rows = entityManager.createNativeQuery(sql).setParameter("veteranAssessmentId", veteranAssessmentId).getResultList();

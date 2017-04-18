@@ -44,10 +44,12 @@ public class RuleAssessmentVariable implements Serializable {
     private AssessmentVariable assessmentVariable;
 
     public RuleAssessmentVariable() {
+	this.dateCreated = new Date();
     }
 
     public RuleAssessmentVariable(Integer ruleAssessmentVariableId) {
         this.ruleAssessmentVariableId = ruleAssessmentVariableId;
+	this.dateCreated = new Date();
     }
 
     public RuleAssessmentVariable(Integer ruleAssessmentVariableId, Date dateCreated) {

@@ -69,7 +69,9 @@ public class VeteranRepositoryImpl extends AbstractHibernateRepository<Veteran> 
                 countOfAssessment,
                 veteranRoot.get("isSensitive")));
 
-        criteriaQuery.groupBy(veteranRoot);
+        criteriaQuery.groupBy(veteranRoot.get("veteranId"), veteranRoot.get("vistaLocalPid"), veteranRoot.get("firstName"), 
+                veteranRoot.get("middleName"), veteranRoot.get("lastName"), veteranRoot.get("ssnLastFour"), veteranRoot.get("email"),
+                veteranRoot.get("gender"), veteranRoot.get("isSensitive"));
 
         List<Predicate> criteriaList = new ArrayList<Predicate>();
 

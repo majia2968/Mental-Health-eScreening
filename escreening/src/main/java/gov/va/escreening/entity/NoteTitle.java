@@ -43,10 +43,12 @@ public class NoteTitle implements Serializable {
     private List<NoteTitleMap> noteTitleMapList;
 
     public NoteTitle() {
+	this.dateCreated = new Date();
     }
 
     public NoteTitle(Integer noteTitleId) {
         this.noteTitleId = noteTitleId;
+	this.dateCreated = new Date();
     }
 
     public NoteTitle(Integer noteTitleId, Date dateCreated) {

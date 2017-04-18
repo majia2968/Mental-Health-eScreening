@@ -51,10 +51,12 @@ public class SurveyPageMeasure implements Serializable {
 	private Measure measure;
 
 	public SurveyPageMeasure() {
+		this.dateCreated = new Date();
 	}
 
 	public SurveyPageMeasure(Integer surveyPageMeasureId) {
 		this.surveyPageMeasureId = surveyPageMeasureId;
+		this.dateCreated = new Date();
 	}
 
 	public SurveyPageMeasure(Integer surveyPageMeasureId, Date dateCreated) {

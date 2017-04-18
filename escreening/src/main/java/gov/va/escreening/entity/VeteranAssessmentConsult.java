@@ -44,10 +44,12 @@ public class VeteranAssessmentConsult implements Serializable {
     private VeteranAssessment veteranAssessment;
 
     public VeteranAssessmentConsult() {
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentConsult(Integer veteranAssessmentConsultId) {
         this.veteranAssessmentConsultId = veteranAssessmentConsultId;
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentConsult(Integer veteranAssessmentConsultId, Date dateCreated) {

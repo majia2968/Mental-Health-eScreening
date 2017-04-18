@@ -77,13 +77,13 @@ public class VeteranAssessmentDashboardAlertRepositoryImpl extends AbstractHiber
 
 		// except Created=1 and Finalized=5
 		sqlBldr.append("WHERE vas.assessmentStatusId not in :assessmentStatusToFilter ");
-		sqlBldr.append("AND date(va.dateUpdated) in :workingDates ");
+		sqlBldr.append("AND CONVERT(date, va.dateUpdated) in :workingDates ");
 
 		if (programId != 99) {
 			sqlBldr.append("AND program.programId = :programId ");
 		}
 
-		sqlBldr.append("GROUP BY da.dashboardAlertId");
+		sqlBldr.append("GROUP BY da.dashboardAlertId, da.name, va.veteranAssessmentId");
 
 		Query query = entityManager.createQuery(sqlBldr.toString());
 
@@ -115,7 +115,7 @@ public class VeteranAssessmentDashboardAlertRepositoryImpl extends AbstractHiber
 
 		sqlBldr.append("WHERE va.percentComplete > 0 ");
 		sqlBldr.append("AND vas.assessmentStatusId not in :assessmentStatusToFilter ");
-		sqlBldr.append("AND date(va.dateUpdated) in :workingDates ");
+		sqlBldr.append("AND CONVERT(date, va.dateUpdated) in :workingDates ");
 
 		if (programId != 99) {
 			sqlBldr.append("AND program.programId = :programId ");
@@ -154,7 +154,7 @@ public class VeteranAssessmentDashboardAlertRepositoryImpl extends AbstractHiber
 
 		sqlBldr.append("WHERE va.duration > 0 ");
 		sqlBldr.append("AND vas.assessmentStatusId not in :assessmentStatusToFilter ");
-		sqlBldr.append("AND date(va.dateUpdated) in :workingDates ");
+		sqlBldr.append("AND CONVERT(date, va.dateUpdated) in :workingDates ");
 
 		if (programId != 99) {
 			sqlBldr.append("AND program.programId = :programId ");
@@ -349,7 +349,7 @@ public class VeteranAssessmentDashboardAlertRepositoryImpl extends AbstractHiber
 		{
 			// take the smallest possible date allowed for clean assessments to be available
 			String smallestDate = getSmallestPossibleAllowedDateAsStr(dvh.validWorkingDates(AssessmentExpirationDaysEnum.CLEAN));
-			String updateSql = String.format("update veteran_assessment set date_archived = now() where date_archived is null and assessment_status_id = 1 and date_created < %s", smallestDate);
+			String updateSql = String.format("update veteran_assessment set date_archived = getdate() where date_archived is null and assessment_status_id = 1 and date_created < %s", smallestDate);
 			Query archiveUnAttendedCleanSql = entityManager.createNativeQuery(updateSql);
 			int recsUpdated1 = archiveUnAttendedCleanSql.executeUpdate();
 			if (logger.isTraceEnabled()) {
@@ -360,7 +360,7 @@ public class VeteranAssessmentDashboardAlertRepositoryImpl extends AbstractHiber
 		{
 			// take all valid dates allowed for finalized assessments to be available
 			String smallestDate = getSmallestPossibleAllowedDateAsStr(dvh.validWorkingDates(AssessmentExpirationDaysEnum.FINALIZED));
-			String updateSql = String.format("update veteran_assessment set date_archived = now() where date_archived is null and assessment_status_id = 5 and date_updated < %s", smallestDate);
+			String updateSql = String.format("update veteran_assessment set date_archived = getdate() where date_archived is null and assessment_status_id = 5 and date_updated < %s", smallestDate);
 			Query archiveUnAttendedFinalizedSql = entityManager.createNativeQuery(updateSql);
 			int recsUpdated2 = archiveUnAttendedFinalizedSql.executeUpdate();
 			if (logger.isTraceEnabled()) {

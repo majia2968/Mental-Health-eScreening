@@ -63,10 +63,12 @@ public class VeteranAssessmentLog implements Serializable {
 	private VeteranAssessmentAction veteranAssessmentAction;
 
 	public VeteranAssessmentLog() {
+		this.dateCreated = new Date();
 	}
 
 	public VeteranAssessmentLog(Integer veteranAssessmentLogId) {
 		this.veteranAssessmentLogId = veteranAssessmentLogId;
+		this.dateCreated = new Date();
 	}
 
 	public VeteranAssessmentLog(Integer veteranAssessmentLogId,

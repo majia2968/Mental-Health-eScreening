@@ -25,7 +25,7 @@
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 				<prop key="hibernate.show_sql">${jdbc.showSql}</prop>
 				<prop key="hibernate.format_sql">${jdbc.showSql}</prop>
-    			<prop key="hibernate.use_sql_comments">${jdbc.showSql}</prop>
+    				<prop key="hibernate.use_sql_comments">${jdbc.showSql}</prop>
             </props>
         </property>
     </bean>

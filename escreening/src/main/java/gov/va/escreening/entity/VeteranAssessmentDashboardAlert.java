@@ -49,10 +49,12 @@ public class VeteranAssessmentDashboardAlert implements Serializable {
     private VeteranAssessment veteranAssessment;
 
     public VeteranAssessmentDashboardAlert() {
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentDashboardAlert(Integer veteranAssessmentDashboardAlertId) {
         this.veteranAssessmentDashboardAlertId = veteranAssessmentDashboardAlertId;
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentDashboardAlert(Integer veteranAssessmentDashboardAlertId, Date dateCreated) {

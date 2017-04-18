@@ -73,6 +73,7 @@ public class ExportLog implements Serializable {
     private byte[] exportZip;
 
     public ExportLog() {
+	this.dateCreated = new Date();
     }
 
     public ExportLog(Integer exportLogId, Date assessmentStartFilter,

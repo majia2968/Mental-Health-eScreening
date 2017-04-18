@@ -15,9 +15,9 @@
 		<org.spring-security-version>3.2.7.RELEASE</org.spring-security-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<jdbc.dialect>org.hibernate.dialect.MySQL5Dialect</jdbc.dialect>
+		<jdbc.dialect>org.hibernate.dialect.SQLServer2012Dialect</jdbc.dialect>
 		<jdbc.showSql>false</jdbc.showSql>
-		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+		<jdbc.driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc.driver>
 		<jdbc.username>escrapp</jdbc.username>
 		<jdbc.password>CHANGE_M3</jdbc.password>
 		<quick.order.ien>51</quick.order.ien>
@@ -333,9 +333,9 @@
 
 		<!-- JDBC -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.27</version>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.2</version>
 		</dependency>
 
 		<!-- Guava -->
@@ -1081,8 +1081,8 @@
 				<finalName>sdc</finalName>
 			</build>
 			<properties>
-				<jdbc.url>jdbc:mysql://localhost:3306/sdc-prod</jdbc.url>
-				<jdbc.db>sdc-prod</jdbc.db>
+				<jdbc.url>jdbc:sqlserver://localhost:1433;databaseName=SDC-Prod</jdbc.url>
+				<jdbc.db>SDC-Prod</jdbc.db>
 				<log.suffix>sdc-prod</log.suffix>
 			</properties>
 		</profile>

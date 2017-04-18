@@ -46,10 +46,12 @@ public class CalculationType implements Serializable {
     private List<MeasureAnswer> measureAnswerList;
 
     public CalculationType() {
+	this.dateCreated = new Date();
     }
 
     public CalculationType(Integer calculationTypeId) {
         this.calculationTypeId = calculationTypeId;
+	this.dateCreated = new Date();
     }
 
     public CalculationType(Integer calculationTypeId, String name, Date dateCreated) {

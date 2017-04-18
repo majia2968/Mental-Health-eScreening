@@ -20,19 +20,19 @@ public class EscreenUserDetailsService extends JdbcDaoSupport implements UserDet
 
     public static final String DEF_USERS_BY_USERNAME_QUERY =
             "select login_id, password, first_name, last_name, user_id, vista_duz, vista_vpid, vista_division, cprs_verified " +
-                    "from user " +
+                    "from [user] " +
                     "where user_status_id = 1 and login_id = ?";
 
     public static final String DEF_AUTHORITIES_BY_USERNAME_QUERY =
             "select r.name " +
-                    "from user u " +
+                    "from [user] u " +
                     "inner join role r on u.role_id = r.role_id " +
                     "where u.login_id = ?";
 
     public static final String DEF_PROGRAMS_BY_USERNAME_QUERY =
             "select up.program_id " +
                     "from user_program up " +
-                    "inner join user u on up.user_id = u.user_id " +
+                    "inner join [user] u on up.user_id = u.user_id " +
                     "inner join program p on up.program_id = p.program_id " + 
                     "where u.login_id = ? and p.is_disabled=0 ";
 

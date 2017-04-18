@@ -1,6 +1,7 @@
 package gov.va.escreening.entity;
 
 import gov.va.escreening.constants.AssessmentConstants;
+import java.util.Date;
 
 public class VeteranAssessmentAuditLogHelper {
 	
@@ -11,6 +12,7 @@ public class VeteranAssessmentAuditLogHelper {
     	auditLogEntry.setVeteranAssessmentEventId(new VeteranAssessmentEvent(eventId));
     	auditLogEntry.setVeteranAssessmentId(veteranAssessment.getVeteranAssessmentId());
     	auditLogEntry.setAssessmentStatusId(new AssessmentStatus(assessmentStatusId));
+	auditLogEntry.setDateCreated(new Date());
 
     	auditLogEntry.setPersonTypeId(new PersonType(personTypeId));
     	if(personTypeId == AssessmentConstants.PERSON_TYPE_USER) {

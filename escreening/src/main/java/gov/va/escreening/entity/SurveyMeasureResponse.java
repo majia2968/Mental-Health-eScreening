@@ -91,10 +91,12 @@ public class SurveyMeasureResponse implements Serializable {
 	}
 
 	public SurveyMeasureResponse() {
+		this.dateCreated = new Date();
 	}
 
 	public SurveyMeasureResponse(Integer surveyMeasureResponseId) {
 		this.surveyMeasureResponseId = surveyMeasureResponseId;
+		this.dateCreated = new Date();
 	}
 
 	public SurveyMeasureResponse(Integer surveyMeasureResponseId,

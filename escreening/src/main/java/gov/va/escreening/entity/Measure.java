@@ -111,10 +111,12 @@ public class Measure implements Serializable {
     private Set<Measure> children = new HashSet<Measure>();
 
     public Measure() {
+	this.dateCreated = new Date();
     }
 
     public Measure(Integer measureId) {
         this.measureId = measureId;
+	this.dateCreated = new Date();
     }
 
     public Measure(Integer measureId, String measureText, boolean isRequired, boolean isPatientProtectedInfo,

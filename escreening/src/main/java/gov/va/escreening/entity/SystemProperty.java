@@ -53,10 +53,12 @@ public class SystemProperty implements Serializable {
     private Date dateCreated;
 
     public SystemProperty() {
+	this.dateCreated = new Date();
     }
 
     public SystemProperty(Integer systemPropertyId) {
         this.systemPropertyId = systemPropertyId;
+	this.dateCreated = new Date();
     }
 
     public SystemProperty(Integer systemPropertyId, String name, Date dateCreated) {

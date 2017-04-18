@@ -49,10 +49,12 @@ public class UserStatus implements Serializable {
 	private List<User> userList;
 
 	public UserStatus() {
+		this.dateCreated = new Date();
 	}
 
 	public UserStatus(Integer userStatusId) {
 		this.userStatusId = userStatusId;
+		this.dateCreated = new Date();
 	}
 
 	public UserStatus(Integer userStatusId, String name, Date dateCreated) {

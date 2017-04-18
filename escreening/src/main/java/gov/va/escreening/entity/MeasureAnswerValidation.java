@@ -55,10 +55,12 @@ public class MeasureAnswerValidation implements Serializable {
 	private Validation validation;
 
 	public MeasureAnswerValidation() {
+		this.dateCreated = new Date();
 	}
 
 	public MeasureAnswerValidation(Integer measureAnswerValidationId) {
 		this.measureAnswerValidationId = measureAnswerValidationId;
+		this.dateCreated = new Date();
 	}
 
 	public MeasureAnswerValidation(Integer measureAnswerValidationId,

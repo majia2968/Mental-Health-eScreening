@@ -49,6 +49,7 @@ public class AssessmentFormula implements Serializable {
     private Date dateCreated;
 
     public AssessmentFormula() {
+	this.dateCreated = new Date();
     }
 
     public Integer getAssessmentFormulaId() {

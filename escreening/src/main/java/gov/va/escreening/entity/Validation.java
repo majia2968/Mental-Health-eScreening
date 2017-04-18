@@ -54,10 +54,12 @@ public class Validation implements Serializable {
 	private List<MeasureValidation> measureValidationList;
 
 	public Validation() {
+		this.dateCreated = new Date();
 	}
 
 	public Validation(Integer validationId) {
 		this.validationId = validationId;
+		this.dateCreated = new Date();
 	}
 
 	public Validation(Integer validationId, String code, String description,

@@ -60,10 +60,12 @@ public class Program implements Serializable {
     private List<ExportLog> exportLogList;
 
     public Program() {
+	this.dateCreated = new Date();
     }
 
     public Program(Integer programId) {
         this.programId = programId;
+	this.dateCreated = new Date();
     }
 
     public Program(Integer programId, String name, boolean isDisabled, Date dateCreated) {

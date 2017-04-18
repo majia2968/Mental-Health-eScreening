@@ -40,10 +40,12 @@ public class DialogPrompt implements Serializable {
     private List<HealthFactorDialogPrompt> healthFactorDialogPromptList;
 
     public DialogPrompt() {
+	this.dateCreated = new Date();
     }
 
     public DialogPrompt(Integer dialogPromptId) {
         this.dialogPromptId = dialogPromptId;
+	this.dateCreated = new Date();
     }
 
     public DialogPrompt(Integer dialogPromptId, String name, Date dateCreated) {

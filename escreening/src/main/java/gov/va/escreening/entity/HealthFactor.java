@@ -52,10 +52,12 @@ public class HealthFactor implements Serializable {
     private ClinicalReminder clinicalReminder;
 
     public HealthFactor() {
+	this.dateCreated = new Date();
     }
 
     public HealthFactor(Integer healthFactorId) {
         this.healthFactorId = healthFactorId;
+	this.dateCreated = new Date();
     }
 
     public HealthFactor(Integer healthFactorId, String name, String vistaIen, Date dateCreated) {

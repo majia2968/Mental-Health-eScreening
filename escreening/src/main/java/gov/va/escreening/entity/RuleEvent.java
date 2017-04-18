@@ -44,10 +44,12 @@ public class RuleEvent implements Serializable {
     private Event event;
 
     public RuleEvent() {
+	this.dateCreated = new Date();
     }
 
     public RuleEvent(Integer ruleEventId) {
         this.ruleEventId = ruleEventId;
+	this.dateCreated = new Date();
     }
 
     public RuleEvent(Integer ruleEventId, Date dateCreated) {

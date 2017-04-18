@@ -51,12 +51,14 @@ public class VeteranAssessmentMeasureVisibility implements Serializable {
         this.veteranAssessment = assessment;
         this.measure = measure;
         this.isVisible = false;
+	this.dateCreated = new Date();
     }
     
     public VeteranAssessmentMeasureVisibility(VeteranAssessment assessment, Measure measure, Boolean isVisible){
         this.veteranAssessment = assessment;
         this.measure = measure;
         this.isVisible = isVisible;
+	this.dateCreated = new Date();
     }
     
     public Integer getVeteranAssessmentMeasureVisibilityId() {

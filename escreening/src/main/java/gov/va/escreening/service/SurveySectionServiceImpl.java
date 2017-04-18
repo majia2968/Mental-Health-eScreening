@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.beans.BeanUtils.*;
@@ -38,6 +39,9 @@ public class SurveySectionServiceImpl implements SurveySectionService {
     @Override
     @Transactional
     public SurveySectionInfo create(SurveySectionInfo surveySectionInfo) {
+	//set date created
+        surveySectionInfo.setDateCreated(new Date());
+
         SurveySection surveySection = new SurveySection();
         copyProperties(surveySectionInfo, surveySection);
 

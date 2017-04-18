@@ -54,10 +54,12 @@ public class DashboardAlert implements Serializable {
     private List<VeteranAssessmentDashboardAlert> veteranAssessmentDashboardAlertList;
 
     public DashboardAlert() {
+	this.dateCreated = new Date();
     }
 
     public DashboardAlert(Integer dashboardAlertId) {
         this.dashboardAlertId = dashboardAlertId;
+	this.dateCreated = new Date();
     }
 
     public DashboardAlert(Integer dashboardAlertId, String name, String message, Date dateCreated) {

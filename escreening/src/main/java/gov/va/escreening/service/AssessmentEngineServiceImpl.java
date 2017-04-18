@@ -53,6 +53,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -882,6 +883,8 @@ public class AssessmentEngineServiceImpl implements AssessmentEngineService {
 			}
 
 			// Add to queue to save to database if everything is okay to save.
+			surveyMeasureResponse.setDateCreated(new Date());
+			surveyMeasureResponse.setDateModified(new Date());
 			surveyMeasureResponseList.add(surveyMeasureResponse);
 		}
 	}

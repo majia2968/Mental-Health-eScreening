@@ -64,10 +64,12 @@ public class VeteranAssessmentAuditLog implements Serializable {
     private VeteranAssessmentEvent veteranAssessmentEventId;
 
     public VeteranAssessmentAuditLog() {
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentAuditLog(Integer veteranAssessmentAuditLogId) {
         this.veteranAssessmentAuditLogId = veteranAssessmentAuditLogId;
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentAuditLog(Integer veteranAssessmentAuditLogId, int veteranAssessmentId, int personId, String personLastName, Date dateCreated) {

@@ -55,15 +55,18 @@ public class VariableTemplate implements Serializable {
     private Template templateId;
 
     public VariableTemplate() {
+	this.dateCreated = new Date();
     }
 
     public VariableTemplate(Integer variableTemplateId) {
         this.variableTemplateId = variableTemplateId;
+	this.dateCreated = new Date();
     }
 
     public VariableTemplate(AssessmentVariable av, Template template) {
         this.assessmentVariableId = av;
         this.templateId = template;
+	this.dateCreated = new Date();
     }
 
     public Integer getVariableTemplateId() {

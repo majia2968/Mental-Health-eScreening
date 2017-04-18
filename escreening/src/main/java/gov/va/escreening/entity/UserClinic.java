@@ -49,10 +49,12 @@ public class UserClinic implements Serializable {
 	private Clinic clinic;
 
 	public UserClinic() {
+		this.dateCreated = new Date();
 	}
 
 	public UserClinic(Integer userClinicId) {
 		this.userClinicId = userClinicId;
+		this.dateCreated = new Date();
 	}
 
 	public UserClinic(Integer userClinicId, Date dateCreated) {

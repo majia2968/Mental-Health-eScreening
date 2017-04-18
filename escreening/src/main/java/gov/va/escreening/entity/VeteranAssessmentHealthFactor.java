@@ -44,10 +44,12 @@ public class VeteranAssessmentHealthFactor implements Serializable {
     private HealthFactor healthFactor;
 
     public VeteranAssessmentHealthFactor() {
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentHealthFactor(Integer veteranAssessmentHealthFactorId) {
         this.veteranAssessmentHealthFactorId = veteranAssessmentHealthFactorId;
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentHealthFactor(Integer veteranAssessmentHealthFactorId, Date dateCreated) {

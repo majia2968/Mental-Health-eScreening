@@ -49,10 +49,12 @@ public class AssessmentVariableType implements Serializable {
     private List<AssessmentVariable> assessmentVariableList;
 
     public AssessmentVariableType() {
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariableType(Integer assessmentVariableTypeId) {
         this.assessmentVariableTypeId = assessmentVariableTypeId;
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariableType(Integer assessmentVariableTypeId, String name, Date dateCreated) {

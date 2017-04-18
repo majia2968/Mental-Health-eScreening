@@ -87,10 +87,12 @@ public class MeasureAnswer implements Serializable {
     }
 
     public MeasureAnswer() {
+	this.dateCreated = new Date();
     }
 
     public MeasureAnswer(Integer measureAnswerId) {
         this.measureAnswerId = measureAnswerId;
+	this.dateCreated = new Date();
     }
 
     public MeasureAnswer(Integer measureAnswerId, Date dateCreated) {

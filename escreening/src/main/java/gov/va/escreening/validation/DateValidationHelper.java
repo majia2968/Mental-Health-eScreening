@@ -67,7 +67,8 @@ public class DateValidationHelper {
 	}
 
 	public String transformJoda2SqlDt(LocalDate date) {
-		String strToDate = String.format("str_to_date('%s', '%s')", date.toString("yyyy-MM-dd"), "%Y-%m-%d");
+		//120 is the format for -- yyyy-mm-dd hh:mm:ss(24h)
+		String strToDate = String.format("CONVERT(date, '%s', 120)", date.toString("yyyy-MM-dd"));
 		return strToDate;
 	}
 

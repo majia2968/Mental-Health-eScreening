@@ -50,10 +50,12 @@ public class AssessmentVariableColumn implements Serializable {
     private AssessmentVariable assessmentVariableId;
 
     public AssessmentVariableColumn() {
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariableColumn(Integer assessmentVariableColumnId) {
         this.assessmentVariableColumnId = assessmentVariableColumnId;
+	this.dateCreated = new Date();
     }
 
     public AssessmentVariableColumn(Integer assessmentVariableColumnId, int columnNum, Date dateCreated) {

@@ -49,10 +49,12 @@ public class TemplateType implements Serializable {
     private List<Template> templateList;
 
     public TemplateType() {
+	this.dateCreated = new Date();
     }
 
     public TemplateType(Integer templateTypeId) {
         this.templateTypeId = templateTypeId;
+	this.dateCreated = new Date();
     }
 
     public TemplateType(Integer templateTypeId, String name, Date dateCreated) {

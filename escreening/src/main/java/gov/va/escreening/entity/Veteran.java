@@ -122,10 +122,12 @@ public class Veteran implements Serializable {
     private List<VeteranAssessment> veteranAssessmentList;
 
     public Veteran() {
+	this.dateCreated = new Date();
     }
 
     public Veteran(Integer veteranId) {
         this.veteranId = veteranId;
+	this.dateCreated = new Date();
     }
 
     public Veteran(Integer veteranId, String lastName, String ssnLastFour, String guid,

@@ -47,10 +47,12 @@ public class ExportType implements Serializable {
     private List<ExportLog> exportLogList;
 
     public ExportType() {
+	this.dateCreated = new Date();
     }
 
     public ExportType(Integer exportTypeId) {
         this.exportTypeId = exportTypeId;
+	this.dateCreated = new Date();
     }
 
     public ExportType(Integer exportTypeId, String name, Date dateCreated) {

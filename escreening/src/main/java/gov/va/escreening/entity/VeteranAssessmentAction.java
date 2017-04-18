@@ -49,10 +49,12 @@ public class VeteranAssessmentAction implements Serializable {
 	private List<VeteranAssessmentLog> veteranAssessmentLogList;
 
 	public VeteranAssessmentAction() {
+		this.dateCreated = new Date();
 	}
 
 	public VeteranAssessmentAction(Integer veteranAssessmentActionId) {
 		this.veteranAssessmentActionId = veteranAssessmentActionId;
+		this.dateCreated = new Date();
 	}
 
 	public VeteranAssessmentAction(Integer veteranAssessmentActionId,

@@ -198,6 +198,9 @@ public class EditorRestController {
             throw new AssessmentEngineDataValidationException(errorResponse);
         }
 
+	//set the date created to now
+	survey.setDateCreated(new Date());
+
         // Call service class here.
         survey = editorsViewDelegate.createSurvey(survey);
 

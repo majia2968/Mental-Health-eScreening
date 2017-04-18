@@ -53,11 +53,14 @@ public class AssessmentVarChildren implements Serializable {
     @ManyToOne(optional = false)
     private AssessmentVariable variableChild;
 
-    public AssessmentVarChildren() {}
+    public AssessmentVarChildren() {
+	this.dateCreated = new Date();
+    }
 
     public AssessmentVarChildren(AssessmentVariable variableParent, AssessmentVariable variableChild) {
         this.variableParent = variableParent;
         this.variableChild = variableChild;
+	this.dateCreated = new Date();
     }
 
     public Integer getAssessmentVarChildrenId() {

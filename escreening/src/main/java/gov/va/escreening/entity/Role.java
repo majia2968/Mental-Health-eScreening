@@ -46,10 +46,12 @@ public class Role implements Serializable {
 	private List<User> userList;
 
 	public Role() {
+		this.dateCreated = new Date();
 	}
 
 	public Role(Integer roleId) {
 		this.roleId = roleId;
+		this.dateCreated = new Date();
 	}
 
 	public Role(Integer roleId, String name, Date dateCreated) {

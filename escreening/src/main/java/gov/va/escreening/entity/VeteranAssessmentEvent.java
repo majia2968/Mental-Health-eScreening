@@ -47,10 +47,12 @@ public class VeteranAssessmentEvent implements Serializable {
     private List<VeteranAssessmentAuditLog> veteranAssessmentAuditLogList;
 
     public VeteranAssessmentEvent() {
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentEvent(Integer veteranAssessmentEventId) {
         this.veteranAssessmentEventId = veteranAssessmentEventId;
+	this.dateCreated = new Date();
     }
 
     public VeteranAssessmentEvent(Integer veteranAssessmentEventId, String name, Date dateCreated) {

@@ -40,10 +40,12 @@ public class UserProgram implements Serializable {
     private Program program;
 
     public UserProgram() {
+	this.dateCreated = new Date();
     }
 
     public UserProgram(Integer userProgramId) {
         this.userProgramId = userProgramId;
+	this.dateCreated = new Date();
     }
 
     public UserProgram(Integer userProgramId, Date dateCreated) {
