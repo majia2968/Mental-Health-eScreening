@@ -202,8 +202,8 @@ public class VistaDelegateImpl implements VistaDelegate, MessageSourceAware {
         long date = assessAppt.getAppointmentDate().getTime();
         Calendar c = Calendar.getInstance();
         c.setTime(assessAppt.getAppointmentDate());
-        c.add(Calendar.HOUR, 24);
-        c.set(Calendar.HOUR, 0); //Set the end date to midnight next day.
+        c.add(Calendar.HOUR_OF_DAY, 23);
+        c.set(Calendar.MINUTE, 59); //Set the end date to midnight next day.
         List<VistaVeteranAppointment> apptList = vistaRepo.getVeteranAppointments(user.getVistaDivision(),
                 user.getVistaVpid(), user.getVistaDuz(), assessAppt.getAppointmentDate(), c.getTime(), vetIen);
 
