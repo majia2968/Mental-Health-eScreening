@@ -10,15 +10,17 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters extends VistaLinkRequ
     private String mentalHealthTestName = null;
     private Date date = null; // Acceptable value is "T" for todays date or a Date Object which should be converted into a Vista date time string.
     private String staffCode = null;
+	private Long locationIEN = null;  // Optional
     private String mentalHealthTestAnswers = null;
 
     public ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters(Long patientIEN,
                                                          String mentalHealthTestName, Date date,
-                                                         String staffCode, String mentalHealthTestAnswers) {
+                                                         String staffCode, Long locationIEN, String mentalHealthTestAnswers) {
         this.patientIEN = patientIEN;
         this.mentalHealthTestName = mentalHealthTestName;
         this.date = date;
         this.staffCode = staffCode;
+	    this.locationIEN = locationIEN;
         this.mentalHealthTestAnswers = mentalHealthTestAnswers;
 
         checkRequiredParameters();
@@ -27,6 +29,7 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters extends VistaLinkRequ
     protected void checkRequiredParameters() {
         super.checkRequestParameterDate("date", date, true);
         super.checkRequestParameterString("staffCode", staffCode, true);
+		super.checkRequestParameterLong("locationIEN", locationIEN, true);
         super.checkRequestParameterLong("patientIEN", patientIEN, true);
         super.checkRequestParameterString("mentalHealthTestName", mentalHealthTestName, true);
         super.checkRequestParameterString("mentalHealthTestAnswers", mentalHealthTestAnswers, true);
@@ -47,7 +50,9 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters extends VistaLinkRequ
     public String getStaffCode() {
         return staffCode;
     }
-
+     public Long getLocationIEN() {
+        return locationIEN;
+    }
     public String getMentalHealthTestAnswers() {
         return mentalHealthTestAnswers;
     }
