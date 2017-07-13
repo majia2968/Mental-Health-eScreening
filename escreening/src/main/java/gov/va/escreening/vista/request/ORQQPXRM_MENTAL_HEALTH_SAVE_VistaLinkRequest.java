@@ -25,7 +25,6 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_VistaLinkRequest extends VistaLinkBaseR
     private String mentalHealthTestName = null;
     private Date date = null;
     private String staffCode = null;
-	private Long locationIEN = null;  // Optional when creating Progress Note.
     private String mentalHealthTestAnswers = null;
 
     public ORQQPXRM_MENTAL_HEALTH_SAVE_VistaLinkRequest(VistaLinkRequestContext<ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters> requestContext) {
@@ -63,7 +62,6 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_VistaLinkRequest extends VistaLinkBaseR
         textHashMap.put(RpcRequest.buildMultipleMSubscriptKey("\"CODE\""), this.mentalHealthTestName);
         textHashMap.put(RpcRequest.buildMultipleMSubscriptKey("\"ADATE\""), VistaUtils.convertToVistaDateString(this.date, VistaDateFormat.MMdd));
         textHashMap.put(RpcRequest.buildMultipleMSubscriptKey("\"STAFF\""), this.staffCode);
-	    textHashMap.put(RpcRequest.buildMultipleMSubscriptKey("\"LOCATION\""), this.locationIEN);
         textHashMap.put(RpcRequest.buildMultipleMSubscriptKey("\"R1\""), this.mentalHealthTestAnswers);
 
         List<Object> requestParams = new ArrayList<Object>();

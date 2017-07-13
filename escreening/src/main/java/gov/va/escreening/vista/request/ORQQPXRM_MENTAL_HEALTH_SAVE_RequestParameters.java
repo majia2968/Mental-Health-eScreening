@@ -10,12 +10,11 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters extends VistaLinkRequ
     private String mentalHealthTestName = null;
     private Date date = null; // Acceptable value is "T" for todays date or a Date Object which should be converted into a Vista date time string.
     private String staffCode = null;
-	private Long locationIEN = null;  // Optional
     private String mentalHealthTestAnswers = null;
 
     public ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters(Long patientIEN,
                                                          String mentalHealthTestName, Date date,
-                                                         String staffCode, Long locationIEN, String mentalHealthTestAnswers) {
+                                                         String staffCode, String mentalHealthTestAnswers) {
         this.patientIEN = patientIEN;
         this.mentalHealthTestName = mentalHealthTestName;
         this.date = date;
@@ -48,9 +47,7 @@ public class ORQQPXRM_MENTAL_HEALTH_SAVE_RequestParameters extends VistaLinkRequ
     public String getStaffCode() {
         return staffCode;
     }
-     public Long getLocationIEN() {
-        return locationIEN;
-    }
+
     public String getMentalHealthTestAnswers() {
         return mentalHealthTestAnswers;
     }
