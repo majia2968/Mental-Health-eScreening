@@ -30,6 +30,8 @@ import javax.annotation.Resource;
 
 import gov.va.escreening.service.export.FormulaColumnsBldr;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +40,7 @@ import com.google.common.base.Strings;
 
 @Service("assessmentVariableService")
 public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
+	private static final Logger logger = LoggerFactory.getLogger(AssessmentVariableSrviceImpl.class);
     private static final String FORMULA_FORMAT = "[%d]";
     
 	@Resource(name = "filterMeasureTypes")
@@ -270,15 +273,28 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 	public Table<String, String, Object> getAssessmentAllVars(boolean ignoreAnswers, boolean includeFormulaTokens){
 	    Table<String, String, Object> assessments = TreeBasedTable.create();
         
+	    logger.trace("getAssessmentAllVars-findAll: execute findAll()");
+	    long startTime = System.nanoTime();
+	    
         List<Survey> surveys = sr.findAll();
         Collection<AssessmentVariable> avList = avr.findAll();
         AvBuilder<Table<String, String, Object>>  avModelBldr = new TableTypeAvModelBuilder(assessments);
         
+        long endTime = System.nanoTime();
+        logger.trace("getAssessmentAllVars-findAll time: {}ms", (endTime - startTime)/1000000l);
+
+	    logger.trace("getAssessmentAllVars-loop: execute loop for filtering by surveys");
+	    startTime = System.nanoTime();
+
         for(Survey survey : surveys){
             List<Measure> measures = survey.createMeasureList();
             //TODO: the implementation of filterBySurvey is not very efficient; it should be updated.
             filterBySurvey(survey, avModelBldr, measures, avList, true, false);
         }
+        
+        endTime = System.nanoTime();
+        logger.trace("getAssessmentAllVars-loop time: {}ms", (endTime - startTime)/1000000l);
+
         return avModelBldr.getResult();
 	}
 	
