@@ -14,38 +14,41 @@
 
     <jpa:repositories base-package="gov.va.escreening.repository"/>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="mainDataSource" />
-        <property name="packagesToScan" value="gov.va.escreening.entity" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-        </property>
-        <property name="jpaProperties">
-            <props>
-				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.show_sql">${jdbc.showSql}</prop>
-				<prop key="hibernate.format_sql">${jdbc.showSql}</prop>
-    				<prop key="hibernate.use_sql_comments">${jdbc.showSql}</prop>
-            </props>
-        </property>
-    </bean>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="mainDataSource" />
+		<property name="packagesToScan" value="gov.va.escreening.entity" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.use_sql_comments">true</prop>
+			</props>
+		</property>
+	</bean>
 
 	
 
 	<!-- BoneCP configuration -->
 	<bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-	   <property name="driverClass" value="${jdbc.driverClassName}" />
-	   <property name="jdbcUrl" value="${jdbc.url}" />
-	   <property name="username" value="${jdbc.username}"/>
-	   <property name="password" value="${jdbc.password}"/>
-	   <property name="idleConnectionTestPeriodInMinutes" value="60"/>
-	   <property name="idleMaxAgeInMinutes" value="240"/>
-	   <property name="maxConnectionsPerPartition" value="50"/>
-	   <property name="minConnectionsPerPartition" value="5"/>
-	   <property name="partitionCount" value="3"/>
-	   <property name="acquireIncrement" value="5"/>
-	   <property name="statementsCacheSize" value="100"/>
-	   <property name="releaseHelperThreads" value="3"/>
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<!--<property name="jdbcUrl" value="${jdbc.url}" />-->
+		<!--<property name="username" value="${jdbc.username}"/>-->
+		<!--<property name="password" value="${jdbc.password}"/>-->
+		<property name="jdbcUrl" value="jdbc:sqlserver://0.0.0.0:1402;databaseName=SDC-PROD" />
+		<property name="username" value="SA"/>
+		<property name="password" value='Password12345678' />
+		<property name="idleConnectionTestPeriodInMinutes" value="60"/>
+		<property name="idleMaxAgeInMinutes" value="240"/>
+		<property name="maxConnectionsPerPartition" value="50"/>
+		<property name="minConnectionsPerPartition" value="5"/>
+		<property name="partitionCount" value="3"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="statementsCacheSize" value="100"/>
+		<property name="releaseHelperThreads" value="3"/>
 	</bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
