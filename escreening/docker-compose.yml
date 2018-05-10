@@ -1,0 +1,35 @@
+version: '2.1'
+services:
+
+  mssql:
+    image: microsoft/mssql-server-linux:latest
+    ports:
+      - 1402:1433
+    volumes:
+      - /var/opt/mssql
+      # we copy our scripts onto the container
+      - ./sql:/usr/src/app 
+    # bash will be executed from that path, our scripts folder
+    working_dir: /usr/src/app 
+    # run the entrypoint.sh that will import the data AND sqlserver
+    command: sh -c 'chmod +x ./entrypoint.sh; ./entrypoint.sh & /opt/mssql/bin/sqlservr;'
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Password12345678
+
+  tomcat:
+    image: tomcat:latest
+    #container_name: kickass_euler
+    #build: ./docker/tomcat
+    volumes:
+      - ./target/escreening-1.0.0-BUILD-SNAPSHOT.war:/usr/local/tomcat/webapps/escreening.war
+      - ./nextgen/sqljdbc4-4.2.jar:/usr/local/tomcat/lib/sqljdbc4-4.2.jar
+    ports:
+      - 8080:8080
+    links:
+      - mssql
+
+networks:
+  default:
+    external:
+      name: mynetwork

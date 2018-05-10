@@ -1,0 +1,28 @@
+- project:
+   name: escreening
+   nexusGroupId: $NEXUS_GROUP_ID
+   nexusArtifactId: $JOB_NAME
+   nexusFile: $JOB_NAME.BUILD-$BUILD_NUMBER.tar.gz
+   nexusURL: $NEXUS_URL
+   nexusProtocol: http
+   nexusRepository: mbb
+   nexusPackaging: tar.gz
+   startingpath: $STARTING_PATH
+   ucp-host: $UCP_HOST
+   dtrhost: $DTR_HOST
+   dtrorganization: $DTR_ORG
+   jobs:
+      - '{name}-app-build':
+          jenkinsnode: app-build
+          gitrepo: '$STASH_URL/vamfc/docker-mvi-mock.git'
+          gitbranch: Release/1.0.0
+          gitcreds: STASH_USER
+          gitsubmodules: false
+          compileline: chmod 755 ./nextgen/build.sh; ./nextgen/build.sh
+          packageline: ""
+      - '{name}-docker-image-build':
+          jenkinsnode: image-build
+          deployline: chmod 755 deploy.sh; ./deploy.sh
+          nexusPath: "/service/local/repositories/{nexusRepository}/content/{nexusGroupId}/"
+      - '{name}-docker-image-deploy':
+          jenkinsnode: image-deploy
