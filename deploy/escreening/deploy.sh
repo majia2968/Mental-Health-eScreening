@@ -39,34 +39,34 @@ refTbiServiceName=${15}
 
 webapps_dir="$INSTANCES_DIR/$instance/webapps"
 
-if [ ! -d "$webapps_dir" ]; then
-	printf "\nTomcat instance $instance does not exist.\nCheck the name or create an instance.\n"
-	exit 1;
-fi
+# if [ ! -d "$webapps_dir" ]; then
+# 	printf "\nTomcat instance $instance does not exist.\nCheck the name or create an instance.\n"
+# 	exit 1;
+# fi
 
-if [ ! -d "${profile}-release" ]; then
-	printf "\neScreening code for $profile (${profile}-release) is not found in this directory.\n"
-	exit 1;
-fi
+# if [ ! -d "${profile}-release" ]; then
+# 	printf "\neScreening code for $profile (${profile}-release) is not found in this directory.\n"
+# 	exit 1;
+# fi
 
-cd "${profile}-release/escreening"
+# cd "${profile}-release/escreening"
 
-# generate date tag string
-stamp=`date +"${profile}_%Y%m%d_%H%M"`
+# # generate date tag string
+# stamp=`date +"${profile}_%Y%m%d_%H%M"`
 
-prev_tag=`git describe --abbrev=0 --tags`
-printf "\nCurrent tag is: $prev_tag \n\nGetting latest code from branch: $branch_to_deploy...\n\n"
+# prev_tag=`git describe --abbrev=0 --tags`
+# printf "\nCurrent tag is: $prev_tag \n\nGetting latest code from branch: $branch_to_deploy...\n\n"
 
-# get release code
-#git stash
-git fetch
-git checkout $branch_to_deploy
-git pull
-#git stash pop --quiet
-printf "\nIf there are no conflicts or errors, hit enter to build the new production package\n"
-read
+# # get release code
+# #git stash
+# git fetch
+# git checkout $branch_to_deploy
+# git pull
+# #git stash pop --quiet
+# printf "\nIf there are no conflicts or errors, hit enter to build the new production package\n"
+# read
 
-git tag $stamp
+# git tag $stamp
 
 printf "\nCreated tag $stamp\n\n"
 
