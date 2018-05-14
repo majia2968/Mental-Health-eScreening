@@ -1,9 +1,11 @@
-package gov.va.escreening.assessments.test;
+package gov.va.escreening.test;
 
 import static org.junit.Assert.*;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
+
+import gov.va.escreening.assessments.test.AssessmentTestBase;
 import gov.va.escreening.delegate.AssessmentDelegate;
 import gov.va.escreening.entity.*;
 import gov.va.escreening.repository.AssessmentVariableRepository;
@@ -11,7 +13,6 @@ import gov.va.escreening.repository.SurveyRepository;
 import gov.va.escreening.repository.VeteranAssessmentRepository;
 import gov.va.escreening.service.AssessmentVariableService;
 import gov.va.escreening.service.VeteranAssessmentService;
-import gov.va.escreening.test.TestAssessmentVariableBuilder;
 
 import java.util.*;
 
