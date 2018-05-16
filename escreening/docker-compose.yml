@@ -1,6 +1,9 @@
 version: '2.1'
 services:
-
+#   escreening:
+#     build: ./nextgen/
+#     ports:
+#       - 5000:5000
   mssql:
     image: microsoft/mssql-server-linux:latest
     ports:
