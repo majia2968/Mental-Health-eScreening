@@ -29,6 +29,9 @@ services:
       - ./nextgen/sqljdbc4-4.2.jar:/usr/local/tomcat/lib/sqljdbc4-4.2.jar
     ports:
       - 8080:8080
+      - 5005:5005
+    environment:
+      - JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
     links:
       - mssql
 
