@@ -3,6 +3,6 @@
 /.project
 /.settings
 /bin
-
+/escreening/src/main/webapp/WEB-INF/spring/data-config.xml
 .idea
 *.iml
