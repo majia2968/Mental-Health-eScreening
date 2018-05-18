@@ -16,12 +16,15 @@ import javax.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.context.annotation.Lazy;
+
 
 import com.google.common.base.Strings;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 
 @Repository
+@Lazy
 public class SurveyMeasureResponseRepositoryImpl extends AbstractHibernateRepository<SurveyMeasureResponse> implements SurveyMeasureResponseRepository {
 
 	@Resource(name = "veteranAssessmentSmrList")

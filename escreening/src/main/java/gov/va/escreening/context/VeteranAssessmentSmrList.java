@@ -6,6 +6,8 @@ import gov.va.escreening.repository.SurveyMeasureResponseRepository;
 import java.util.List;
 
 import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,8 @@ import com.google.common.collect.Table;
 
 @Component("veteranAssessmentSmrList")
 public class VeteranAssessmentSmrList {
-	@Resource(type = SurveyMeasureResponseRepository.class)
+	@Autowired
+    @Lazy
 	SurveyMeasureResponseRepository smrr;
 
 	private ThreadLocal<Cache> t = new ThreadLocal<>();
