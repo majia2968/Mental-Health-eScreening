@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 //this is to ensure all tests do not leave trace, so they are repeatable.
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
+@ContextConfiguration(locations = { "file:src/test/resources/spring/root-context.xml" })
 public class AssessmentVariableSrviceTest {
 	
 	@Resource
