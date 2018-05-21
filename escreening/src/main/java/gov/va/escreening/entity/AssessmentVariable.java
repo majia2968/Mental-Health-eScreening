@@ -66,13 +66,13 @@ public class AssessmentVariable implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assessmentVariableId")//, fetch = FetchType.LAZY) 
     private List<VariableTemplate> variableTemplateList;
     @JoinColumn(name = "measure_id", referencedColumnName = "measure_id")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private Measure measure;
     @JoinColumn(name = "assessment_variable_type_id", referencedColumnName = "assessment_variable_type_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch=FetchType.LAZY)
     private AssessmentVariableType assessmentVariableTypeId;
     @JoinColumn(name = "measure_answer_id", referencedColumnName = "measure_answer_id")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private MeasureAnswer measureAnswer;
     
     //TODO: We should change this to have a list (or Set really) of AssessmentVariables and not a list of AssessmentVarChildren

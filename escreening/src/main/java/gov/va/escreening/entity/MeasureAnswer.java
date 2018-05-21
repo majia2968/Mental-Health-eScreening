@@ -61,7 +61,7 @@ public class MeasureAnswer implements Serializable {
     private List<MeasureAnswerValidation> measureAnswerValidationList;
 
     @JoinColumn(name = "measure_id", referencedColumnName = "measure_id")
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Measure measure;
     
     @JoinColumn(name = "calculation_type_id", referencedColumnName = "calculation_type_id")

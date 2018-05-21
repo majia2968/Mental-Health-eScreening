@@ -15,6 +15,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +61,7 @@ public class Measure implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
     @JoinColumn(name = "measure_type_id", referencedColumnName = "measure_type_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch=FetchType.LAZY)
     private MeasureType measureType;
     
     @Column(name = "vista_text")
@@ -103,7 +104,7 @@ public class Measure implements Serializable {
     @OneToMany(mappedBy = "measure")
     private List<AssessmentVariable> assessmentVariableList;
     
-    @ManyToOne(cascade = { CascadeType.ALL }, optional = true)
+    @ManyToOne(cascade = { CascadeType.ALL }, optional = true,fetch=FetchType.LAZY)
     @JoinColumn(name = "parent_measure_id")
     private Measure parent;
     @OrderBy("displayOrder")

@@ -271,7 +271,7 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 	    Table<String, String, Object> assessments = TreeBasedTable.create();
         
         List<Survey> surveys = sr.findAll();
-        Collection<AssessmentVariable> avList = avr.findAll();
+        Collection<AssessmentVariable> avList = avr.findAllAvs();
         AvBuilder<Table<String, String, Object>>  avModelBldr = new TableTypeAvModelBuilder(assessments);
         
         for(Survey survey : surveys){

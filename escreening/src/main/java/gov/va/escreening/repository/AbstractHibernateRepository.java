@@ -30,6 +30,11 @@ public class AbstractHibernateRepository<T extends Serializable> implements Repo
 	public final List<T> findAll() {
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
+	
+	public final List<T> findAllAvs() {
+		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure left join fetch av.assessmentVarChildrenList left join fetch av.measureAnswer "
+				+ "left join fetch av.assessmentVariableTypeId").getResultList();
+	}
 
 	public final void create(final T entity) {
 		// Persist is being used instead of 'save'. PK field will not be set immediately.
