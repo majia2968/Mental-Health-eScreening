@@ -177,16 +177,17 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 
         // by default have empty set of measures assigned to the requested Survey
         Collection<Measure> measures = Lists.newArrayList();
+        measures = survey.createMeasureList();
         // retrieve a list of all surveys along with their measures
-        Multimap<Survey, Measure> surveyMap = buildSurveyMeasuresMap();
-
-        for (Survey s : surveyMap.keySet()) {
-            if (moduleId == s.getSurveyId()) {
-                measures = surveyMap.get(s);
-                survey = s;
-                break;
-            }
-        }
+//        Multimap<Survey, Measure> surveyMap = buildSurveyMeasuresMap();
+//
+//        for (Survey s : surveyMap.keySet()) {
+//            if (moduleId == s.getSurveyId()) {
+//                measures = surveyMap.get(s);
+//                survey = s;
+//                break;
+//            }
+//        }
 
         Set<String> avUsed = Sets.newHashSet();
         Set<List<String>> formulaColumnsSet = Sets.newLinkedHashSet();

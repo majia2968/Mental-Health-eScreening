@@ -31,8 +31,12 @@ public class AbstractHibernateRepository<T extends Serializable> implements Repo
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
 	
+	public final List<T> findAllAvsFms() {
+		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure ms join fetch ms.parent ").getResultList();
+	}
+	
 	public final List<T> findAllAvs() {
-		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure left join fetch av.assessmentVarChildrenList left join fetch av.measureAnswer "
+		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure ms left join fetch ms.parent left join fetch av.assessmentVarChildrenList left join fetch av.measureAnswer "
 				+ "left join fetch av.assessmentVariableTypeId").getResultList();
 	}
 

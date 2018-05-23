@@ -21,8 +21,9 @@ public class AssessmentVariableSrviceTest {
 	AssessmentVariableService avs;
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void testGetAssessmentAllVars() {
+		//assertTrue(avs.getAssessmentAllVars(true, false).size() == 9);
 		assertTrue(avs.getAssessmentAllVars(true, false).size() == 9);
 	}
 	
@@ -31,5 +32,13 @@ public class AssessmentVariableSrviceTest {
 	public void testGetAssessmentVarsForSurvey() {
 		avs.getAssessmentVarsForSurvey(59, true, false);
 	}
+	
+	@Test
+	//@Ignore
+	public void testAskFormulasFor() {
+		assertTrue(avs.askFormulasFor(15).size() == 2);
+	}
+	
+
 
 }
