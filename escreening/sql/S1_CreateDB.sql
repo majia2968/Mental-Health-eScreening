@@ -119,7 +119,7 @@ CREATE TABLE
    [assessment_variable_id] int  NOT NULL,
    [display_order] int  NOT NULL,
    [formula_token] varchar(255)  NOT NULL,
-   [user_defined] binary(1)  NOT NULL,
+   [user_defined] bit  NOT NULL,
    [date_created] datetime DEFAULT getdate()  NOT NULL
 )
 GO

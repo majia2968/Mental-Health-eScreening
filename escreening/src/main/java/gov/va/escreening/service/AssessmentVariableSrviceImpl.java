@@ -224,15 +224,15 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
                                boolean useFilteredMeasures, boolean includeFormulaTokens) {
 		
 		boolean ignoreAnswers=useFilteredMeasures;
-		Collection<Measure>filteredMeasures = null;
-		if(useFilteredMeasures){
-			filteredMeasures = filterMeasures(smList, filterMeasureTypes);
-		}
 		
 		for (AssessmentVariable av : avList) {
 			int avTypeId = av.getAssessmentVariableTypeId().getAssessmentVariableTypeId();
 			switch (avTypeId) {
 			case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_MEASURE:
+				Collection<Measure>filteredMeasures = null;
+				if(useFilteredMeasures){
+					filteredMeasures = filterMeasures(smList, filterMeasureTypes);
+				}
 				Collection<Measure> measures = useFilteredMeasures ? filteredMeasures : smList;
 				handleMeasureType(av, measures, avBldr);
 				break;
