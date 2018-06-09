@@ -103,7 +103,7 @@ public class ProgramServiceImpl implements ProgramService {
 
         List<DropDownObject> dropDownList = new ArrayList<DropDownObject>();
 
-        List<Program> programList = programRepository.findByProgramIdList(programIdList);
+        List<Program> programList = programRepository.findAll();
         for (Program program : programList) {
             DropDownObject dropDown = new DropDownObject(String.valueOf(program.getProgramId()), program.getName());
             dropDownList.add(dropDown);
