@@ -153,7 +153,7 @@ public class AssessmentVariableSrviceTest {
 
 	@Ignore
 	@Test
-	public void testExportData()
+	public void testExportData() throws java.text.ParseException
 	{
 		ExportDataFormBean exportDataFormBean = getSearchFormBean(null, "05/22/2000", "05/24/2018", "", "", "1", "", "", "", null);
 		exportDataFormBean.setExportedByUserId(1);
@@ -183,7 +183,7 @@ public class AssessmentVariableSrviceTest {
 												String fromAssessmentDate, String toAssessmentDate,
 												String clinicianId, String createdByUserId, String programId,
 												String veteranId, String comment, String exportDataType,
-												List<String> errors) {
+												List<String> errors) throws java.text.ParseException {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 

@@ -158,33 +158,33 @@ public class CreateAssessmentDelegateImpl implements CreateAssessmentDelegate {
         List<VeteranDto> dbResultList = veteranService.searchVeterans(lastName,
                 ssnLastFour);
 
-        List<VeteranDto> vistaResultList = null;
-
-        if (escreenUser.getCprsVerified()) {
-            vistaResultList = vistaService.searchVeteran(
-                    escreenUser.getVistaDivision(), escreenUser.getVistaVpid(),
-                    escreenUser.getVistaDuz(), appProxyName, lastName,
-                    ssnLastFour);
-        }
-
-        if (vistaResultList == null) {
-            vistaResultList = new ArrayList<VeteranDto>();
-        }
-
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-
-        for (int i = 0; i < dbResultList.size(); ++i) {
-            if (StringUtils.isNotBlank(dbResultList.get(i).getVeteranIen())) {
-                ht.put(dbResultList.get(i).getVeteranIen(), dbResultList.get(i)
-                        .getVeteranIen());
-            }
-        }
-
-        for (int i = 0; i < vistaResultList.size(); ++i) {
-            if (!ht.containsKey(vistaResultList.get(i).getVeteranIen())) {
-                dbResultList.add(vistaResultList.get(i));
-            }
-        }
+//        List<VeteranDto> vistaResultList = null;
+//
+//        if (escreenUser.getCprsVerified()) {
+//            vistaResultList = vistaService.searchVeteran(
+//                    escreenUser.getVistaDivision(), escreenUser.getVistaVpid(),
+//                    escreenUser.getVistaDuz(), appProxyName, lastName,
+//                    ssnLastFour);
+//        }
+//
+//        if (vistaResultList == null) {
+//            vistaResultList = new ArrayList<VeteranDto>();
+//        }
+//
+//        Hashtable<String, String> ht = new Hashtable<String, String>();
+//
+//        for (int i = 0; i < dbResultList.size(); ++i) {
+//            if (StringUtils.isNotBlank(dbResultList.get(i).getVeteranIen())) {
+//                ht.put(dbResultList.get(i).getVeteranIen(), dbResultList.get(i)
+//                        .getVeteranIen());
+//            }
+//        }
+//
+//        for (int i = 0; i < vistaResultList.size(); ++i) {
+//            if (!ht.containsKey(vistaResultList.get(i).getVeteranIen())) {
+//                dbResultList.add(vistaResultList.get(i));
+//            }
+//        }
 
         List<SelectVeteranResultDto> searchResultList = new ArrayList<SelectVeteranResultDto>();
 
