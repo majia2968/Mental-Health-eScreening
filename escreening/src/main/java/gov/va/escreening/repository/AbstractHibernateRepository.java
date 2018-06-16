@@ -2,10 +2,8 @@ package gov.va.escreening.repository;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,14 +28,15 @@ public class AbstractHibernateRepository<T extends Serializable> implements Repo
 	public final List<T> findAll() {
 		return entityManager.createQuery("from " + clazz.getName()).getResultList();
 	}
-	
-	public final List<T> findAllAvsFms() {
-		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure ms join fetch ms.parent ").getResultList();
+
+	public final List<T> findAllAssessmentVariables() {
+		return entityManager.createQuery("select distinct a FROM AssessmentVariable a left JOIN fetch a.measure left JOIN fetch a.assessmentVarChildrenList " +
+				"left join fetch a.measureAnswer ").getResultList();
 	}
-	
-	public final List<T> findAllAvs() {
-		return entityManager.createQuery("select distinct av from AssessmentVariable av left join fetch av.measure ms left join fetch ms.parent left join fetch av.assessmentVarChildrenList left join fetch av.measureAnswer "
-				+ "left join fetch av.assessmentVariableTypeId").getResultList();
+
+	public final List<T> findAvs() {
+		return entityManager.createQuery("select distinct a FROM AssessmentVariable a left JOIN fetch a.assessmentVarChildrenList " +
+				"left join fetch a.measureAnswer ").setHint("org.hibernate.cacheable", Boolean.TRUE).getResultList();
 	}
 
 	public final void create(final T entity) {

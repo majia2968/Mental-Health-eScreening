@@ -17,6 +17,8 @@ import gov.va.escreening.service.VeteranAssessmentService;
 import java.util.*;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Test;
@@ -30,7 +32,7 @@ import com.google.common.collect.Lists;
 @Transactional
 //this is to ensure all tests do not leave trace, so they are repeatable.
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml" })
+@ContextConfiguration(locations = { "file:src/test/resources/spring/root-context.xml" })
 public class AssessmentVariableServiceTest extends AssessmentTestBase
 {
 	@Resource
@@ -55,8 +57,27 @@ public class AssessmentVariableServiceTest extends AssessmentTestBase
 	private AssessmentVariableRepository avr;
 
 	private List<Measure> measures;
+	
+	
     @Test
 	//@Ignore
+    public void testCache()
+	{
+    	AssessmentVariable av = avr.findOne(1);
+    	AssessmentVariable av1 = avr.findOne(1);
+    	AssessmentVariable av2 = avr.findOne(1);
+		//Collection<AssessmentVariable> avList1 = avr.findAll();
+		Collection<AssessmentVariable> avList2 = avr.findAvs();
+		Collection<AssessmentVariable> avList3 = avr.findAvs();
+		Collection<AssessmentVariable> avList4 = avr.findAvs();
+
+
+		//System.out.println(avTableToList(t).toString());
+		//assertEquals(7816, avService.getAssessmentAllVars(true, false).size());
+	}
+    
+    //@Test
+	@Ignore
     public void testTimeSeries()
 	{
 		//Collection<AssessmentVariable> avList = avr.findAll();
@@ -73,7 +94,7 @@ public class AssessmentVariableServiceTest extends AssessmentTestBase
 		assertEquals(7816, avService.getAssessmentAllVars(true, false).size());
 	}
 	@Ignore
-	@Test
+	//@Test
 	public void testformulas()
 	{
 		List<Map<String, String>> fm = avService.askFormulasFor(16);

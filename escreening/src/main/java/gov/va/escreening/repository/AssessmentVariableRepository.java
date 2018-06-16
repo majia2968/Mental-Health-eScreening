@@ -8,11 +8,11 @@ import gov.va.escreening.entity.AssessmentVariable;
 public interface AssessmentVariableRepository extends RepositoryInterface<AssessmentVariable> {
 	List<AssessmentVariable> findAllFormulae();
 
-	List<AssessmentVariable> findAllAvsFms();
-	
-	List<AssessmentVariable> findAllAvs();
-	
-	AssessmentVariable findOneByDisplayName(String name);
+    List<AssessmentVariable> findAllAssessmentVariables();
+
+    List<AssessmentVariable> findAvs();
+
+    AssessmentVariable findOneByDisplayName(String name);
 
     Collection<AssessmentVariable> findByDisplayNames(List<String> displayNames);
 

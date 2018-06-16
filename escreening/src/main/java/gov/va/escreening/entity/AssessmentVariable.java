@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +42,7 @@ import com.google.common.collect.Maps;
  * @author jocchiuzzo
  */
 @Entity
+@Cacheable(true)
 @Table(name = "assessment_variable")
 @NamedQueries({
         @NamedQuery(name = "AssessmentVariable.findAll", query = "SELECT a FROM AssessmentVariable a")})

@@ -113,6 +113,13 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 
             handleAvChilren(survey, av, smList, this, avList, ignoreAnswers, false);
 		}
+
+		public void buildFormula(Survey survey, AssessmentVariable av,
+								 Collection<Measure> smList,
+								 Collection<AssessmentVariable> avList, boolean ignoreAnswers, boolean avFlag) {
+
+			handleAvChilren(survey, av, smList, this, avList, ignoreAnswers, false, avFlag);
+		}
 	}
 	
 	@Override
@@ -173,21 +180,9 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
     @Transactional(readOnly = true)
     public List<Map<String, String>> askFormulasFor(Integer moduleId) {
         Survey survey = sr.findOne(moduleId);
+		Collection<Measure> measures = Lists.newArrayList();
+		if (survey != null) measures = survey.createMeasureList();
         List<AssessmentVariable> allFormulas = avr.findAllFormulae();
-
-        // by default have empty set of measures assigned to the requested Survey
-        Collection<Measure> measures = Lists.newArrayList();
-        measures = survey.createMeasureList();
-        // retrieve a list of all surveys along with their measures
-//        Multimap<Survey, Measure> surveyMap = buildSurveyMeasuresMap();
-//
-//        for (Survey s : surveyMap.keySet()) {
-//            if (moduleId == s.getSurveyId()) {
-//                measures = surveyMap.get(s);
-//                survey = s;
-//                break;
-//            }
-//        }
 
         Set<String> avUsed = Sets.newHashSet();
         Set<List<String>> formulaColumnsSet = Sets.newLinkedHashSet();
@@ -224,15 +219,15 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
                                boolean useFilteredMeasures, boolean includeFormulaTokens) {
 		
 		boolean ignoreAnswers=useFilteredMeasures;
+		Collection<Measure>filteredMeasures = null;
+		if(useFilteredMeasures){
+			filteredMeasures = filterMeasures(smList, filterMeasureTypes);
+		}
 		
 		for (AssessmentVariable av : avList) {
 			int avTypeId = av.getAssessmentVariableTypeId().getAssessmentVariableTypeId();
 			switch (avTypeId) {
 			case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_MEASURE:
-				Collection<Measure>filteredMeasures = null;
-				if(useFilteredMeasures){
-					filteredMeasures = filterMeasures(smList, filterMeasureTypes);
-				}
 				Collection<Measure> measures = useFilteredMeasures ? filteredMeasures : smList;
 				handleMeasureType(av, measures, avBldr);
 				break;
@@ -259,6 +254,46 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 		}
 	}
 
+	public void filterBySurvey(Survey survey, AvBuilder<?> avBldr,
+							   Collection<Measure> smList, Collection<AssessmentVariable> avList,
+							   boolean useFilteredMeasures, boolean includeFormulaTokens, boolean avFlag) {
+
+		boolean ignoreAnswers=useFilteredMeasures;
+		Collection<Measure>filteredMeasures = null;
+		if(useFilteredMeasures){
+			filteredMeasures = filterMeasures(smList, filterMeasureTypes);
+		}
+
+		for (AssessmentVariable av : avList) {
+			int avTypeId = av.getAssessmentVariableTypeId().getAssessmentVariableTypeId();
+			switch (avTypeId) {
+				case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_MEASURE:
+					Collection<Measure> measures = useFilteredMeasures ? filteredMeasures : smList;
+					handleMeasureType(av, measures, avBldr);
+					break;
+				case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_MEASURE_ANSWER:
+					// if caller has asked to filter the measures (see case 1) then do not return measure answers
+					if (!ignoreAnswers) {
+						handleMeasureAnswerType(av, smList, avBldr);
+					}
+					break;
+				case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_CUSTOM:
+					handleCustomType(av, avBldr);
+					break;
+				case AssessmentConstants.ASSESSMENT_VARIABLE_TYPE_FORMULA:
+					handleFormulaType(survey, av, smList, avBldr, avList, ignoreAnswers, true);
+					break;
+				case 5:
+					if (includeFormulaTokens) {
+						handleCustomType(av, avBldr);
+					}
+					break;
+				default:
+					throw new IllegalStateException(String.format("The AssessmentVariable type of %s is not supported", avTypeId));
+			}
+		}
+	}
+
 	@Override
     public Collection<AssessmentVariable> findAllFormulas() {
 		return avr.findAllFormulae();
@@ -272,13 +307,21 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 	    Table<String, String, Object> assessments = TreeBasedTable.create();
         
         List<Survey> surveys = sr.findAll();
-        Collection<AssessmentVariable> avList = avr.findAllAvs();
+        Collection<AssessmentVariable> avList = avr.findAllAssessmentVariables();
         AvBuilder<Table<String, String, Object>>  avModelBldr = new TableTypeAvModelBuilder(assessments);
         
         for(Survey survey : surveys){
             List<Measure> measures = survey.createMeasureList();
-            //TODO: the implementation of filterBySurvey is not very efficient; it should be updated.
-            filterBySurvey(survey, avModelBldr, measures, avList, true, false);
+			List<Measure> childMeasures = new LinkedList<>();
+			for (Measure m : measures) {
+				if (!m.getChildren().isEmpty()) {
+					childMeasures.addAll(m.getChildren());
+				}
+			}
+
+			//TODO: the implementation of filterBySurvey is not very efficient; it should be updated.
+			filterBySurvey(survey, avModelBldr, measures, avList, true, false, true);
+			filterBySurvey(survey, avModelBldr, childMeasures, avList, true, false, true);
         }
         return avModelBldr.getResult();
 	}
@@ -295,7 +338,7 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 	 * return all Assessments Variables without any filtering except when the AssessmentVariable of type 1 (av_type=1) (Measure). 
 	 * If av_type=1 then only return those which belong to Measure Types of 1, 2, or 3
 	 */
-    public Table<String, String, Object> getAssessmentVarsForSurvey(int surveyId, boolean ignoreAnswers, boolean includeFormulaTokens) {
+    public Table<String, String, Object>  getAssessmentVarsForSurvey(int surveyId, boolean ignoreAnswers, boolean includeFormulaTokens) {
 
 		// by default have empty set of measures assigned to the requested Survey
 		Collection<Measure> measures = Lists.newArrayList();
@@ -314,7 +357,7 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 
 		Table<String, String, Object> assessments = TreeBasedTable.create();
 
-		Collection<AssessmentVariable> avList = avr.findAll();
+		Collection<AssessmentVariable> avList = avr.findAvs();
 		AvBuilder<Table<String, String, Object>>  avModelBldr = new TableTypeAvModelBuilder(assessments);
         filterBySurvey(survey, avModelBldr, measures, avList, ignoreAnswers, includeFormulaTokens);
 		return avModelBldr.getResult();
@@ -562,6 +605,13 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 		avBldr.buildFormula(survey, av, smList, avList, ignoreAnswers);
 	}
 
+	private void handleFormulaType(Survey survey, AssessmentVariable av,
+								   Collection<Measure> smList, AvBuilder<?> avBldr,
+								   Collection<AssessmentVariable> avList, boolean ignoreAnswers, boolean avFlag) {
+
+		avBldr.buildFormula(survey, av, smList, avList, ignoreAnswers, avFlag);
+	}
+
 	private void handleAvChilren(Survey survey, AssessmentVariable avFormula,
 			Collection<Measure> smList, AvBuilder<?> avBldr,
                                  Collection<AssessmentVariable> avList, boolean ignoreAnswers, boolean includeFormulaTokens) {
@@ -583,6 +633,34 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 			}
 			if (!m.getChildren().isEmpty()) {
                 filterBySurvey(survey, avBldr, m.getChildren(), avList, ignoreAnswers, includeFormulaTokens);
+			}
+		}
+
+	}
+
+	private void handleAvChilren(Survey survey, AssessmentVariable avFormula,
+								 Collection<Measure> smList, AvBuilder<?> avBldr,
+								 Collection<AssessmentVariable> avList, boolean ignoreAnswers, boolean includeFormulaTokens, boolean avFlag) {
+
+		List<AssessmentVarChildren> avcList = avFormula.getAssessmentVarChildrenList();
+
+		for (Measure m : smList) {
+			for (AssessmentVarChildren avc : avcList) {
+				AssessmentVariable av = avc.getVariableChild();
+
+				// no need to compare measure or compare measure answer if the av is a formula type
+				if (!av.isFormula() && compareMeasure(av, m)) {
+					avBldr.buildFromMeasure(av, avc, m);
+					handleCustomType(avFormula, avBldr);
+				} else if (!av.isFormula() && compareMeasureAnswer(av, m)) {
+					avBldr.buildFromMeasureAnswer(av, avc, m, avc.getVariableChild().getMeasureAnswer());
+					handleCustomType(avFormula, avBldr);
+				}
+			}
+			if (!avFlag) {
+				if (!m.getChildren().isEmpty()) {
+					filterBySurvey(survey, avBldr, m.getChildren(), avList, ignoreAnswers, includeFormulaTokens);
+				}
 			}
 		}
 
