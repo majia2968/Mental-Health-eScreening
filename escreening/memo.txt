@@ -1,3 +1,0 @@
-Tracking changes for development:
-
-1.Formula editor loading slow issue:
