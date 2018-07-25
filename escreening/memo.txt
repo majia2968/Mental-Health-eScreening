@@ -1,6 +1,0 @@
-Tracking changes for development:
-
-1.Formula editor loading slow issue:
-
-org.hibernate.LazyInitializationException: could not initialize proxy - no Session:
-<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
