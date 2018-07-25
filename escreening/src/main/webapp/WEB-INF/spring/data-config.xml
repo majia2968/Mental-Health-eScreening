@@ -13,30 +13,32 @@
 	<context:property-placeholder location="classpath:app-settings.properties" system-properties-mode="OVERRIDE" />
 
     <jpa:repositories base-package="gov.va.escreening.repository"/>
-
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="mainDataSource" />
 		<property name="packagesToScan" value="gov.va.escreening.entity" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
+		<property name="persistenceProvider">
+        	<bean class="org.hibernate.jpa.HibernatePersistenceProvider"></bean>
+    	</property>
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.use_sql_comments">true</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="javax.persistence.sharedCache.mode">ENABLE_SELECTIVE</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 			</props>
 		</property>
-	    <property name="jpaPropertyMap">
-	        <map>
-	            <entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory"/>
-	            <entry key="hibernate.cache.use_second_level_cache" value="true"/>
-	            <entry key="hibernate.cache.use_query_cache" value="true"/>
-	            <entry key="javax.persistence.sharedCache.mode" value="ENABLE_SELECTIVE" />
-	        </map>
-	    </property>
 	</bean>
+
+<!-- 	<ehcache:annotation-driven cache-manager="cacheManager"/>
+ -->	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
 
 	<!-- BoneCP configuration -->
 	<bean id="mainDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
@@ -45,8 +47,7 @@
 		<!--<property name="username" value="${jdbc.username}"/>-->
 		<!--<property name="password" value="${jdbc.password}"/>-->
 		<property name="jdbcUrl" value="jdbc:sqlserver://mssql:1433;databaseName=SDC-PROD" />
-<!-- 		<property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;databaseName=SDC-PROD" /> -->
-		<property name="username" value="SA"/>
+ 		<property name="username" value="SA"/>
 		<property name="password" value='Password12345678' />
 		<property name="idleConnectionTestPeriodInMinutes" value="60"/>
 		<property name="idleMaxAgeInMinutes" value="240"/>
