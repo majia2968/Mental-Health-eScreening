@@ -118,6 +118,29 @@ public class FormulaColumnsBldr implements AvBuilder<Set<List<String>>> {
             }
         }
     }
+    
+    public void buildFormula(Survey survey, AssessmentVariable av,
+    		                             Collection<Measure> smList,
+    		                            Collection<AssessmentVariable> avList,
+    	                             boolean filterMeasures, boolean avFlag) {
+    		
+	        for (Measure m : smList) {
+	            for (AssessmentVarChildren avc : av.getAssessmentVarChildrenList()) {
+	                AssessmentVariable av1 = avc.getVariableChild();
+	                if (avs.compareMeasure(av1, m)) {
+                    buildFromMeasure(av, avc, m);
+	                } else if (avs.compareMeasureAnswer(av1, m)) {
+	                    buildFromMeasureAnswer(av, avc, m, av1.getMeasureAnswer());
+	               }
+            }
+	            if (!avFlag) {
+	                if (!m.getChildren().isEmpty()) {
+	                    avs.filterBySurvey(survey, this, m.getChildren(), avList, filterMeasures, false);
+	                }
+	            }
+	            
+	        }
+    }
 
     interface ExportNameExtractor {
         String extractExportName(AssessmentVarChildren avc);

@@ -18,6 +18,10 @@ public interface AvBuilder<T> {
 	void buildFormula(Survey survey, AssessmentVariable av,
 			Collection<Measure> smList, Collection<AssessmentVariable> avList,
 			boolean filterMeasures);
+	
+	void buildFormula(Survey survey, AssessmentVariable av,
+			Collection<Measure> smList, Collection<AssessmentVariable> avList,
+			boolean filterMeasures, boolean avFlag);
 
 	T getResult();
 
