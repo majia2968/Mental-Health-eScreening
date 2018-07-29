@@ -179,6 +179,7 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 
 	@Override
     @Transactional(readOnly = true)
+	@Cacheable("formulas")
     public List<Map<String, String>> askFormulasFor(Integer moduleId) {
         Survey survey = sr.findOne(moduleId);
 		Collection<Measure> measures = Lists.newArrayList();
@@ -200,8 +201,12 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
             formulaMap.put("description", formulaColumnsIter.next());
             formulas.add(formulaMap);
         }
-        System.out.println("Hello, KItyy");
         return formulas;
+    }
+
+    @Override
+    public String getPlainText(String htmlText) {
+        return htmlText != null ? htmlText.replaceAll("\\<.*?>", "") : "";
     }
 
 	@Override
