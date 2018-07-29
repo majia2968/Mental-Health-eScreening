@@ -69,7 +69,7 @@ xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
     <!-- Sample cache named sampleCache2
         This cache contains 1000 elements. Elements will always be held in memory.
         They are not expired. -->
-    <cache name="formulas"
+    <cache name="sampleCache2"
         maxElementsInMemory="1000"
         eternal="true"
         timeToIdleSeconds="0"

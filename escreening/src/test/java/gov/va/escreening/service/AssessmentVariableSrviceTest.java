@@ -114,14 +114,16 @@ public class AssessmentVariableSrviceTest {
 		//System.out.println(avTableToList(t).toString());
 		assertEquals(7816, avService.getAssessmentAllVars(true, false).size());
 	}
-	@Ignore
+	
 	@Test
-	public void testformulas()
+	public void testAskFormulasFor()
 	{
 		assertEquals(2,avService.askFormulasFor(16).size());
+		assertEquals(2,avService.askFormulasFor(16).size());
 	}
+	
 
-	//@Ignore
+	@Ignore
 	@Test
 	public void testVisibility()
 	{

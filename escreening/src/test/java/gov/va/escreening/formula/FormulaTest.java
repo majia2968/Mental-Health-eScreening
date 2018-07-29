@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+@ContextConfiguration(locations = {"file:src/test/resources/spring/root-context.xml"})
 public class FormulaTest {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource(type = ExpressionEvaluatorService.class)

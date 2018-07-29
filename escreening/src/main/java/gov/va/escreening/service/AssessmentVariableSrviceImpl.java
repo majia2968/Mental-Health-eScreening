@@ -30,6 +30,7 @@ import javax.annotation.Resource;
 
 import gov.va.escreening.service.export.FormulaColumnsBldr;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -199,12 +200,8 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
             formulaMap.put("description", formulaColumnsIter.next());
             formulas.add(formulaMap);
         }
+        System.out.println("Hello, KItyy");
         return formulas;
-    }
-
-    @Override
-    public String getPlainText(String htmlText) {
-        return htmlText != null ? htmlText.replaceAll("\\<.*?>", "") : "";
     }
 
 	@Override
