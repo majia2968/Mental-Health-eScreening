@@ -46,7 +46,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
-@Transactional
+//@Transactional
 //this is to ensure all tests do not leave trace, so they are repeatable.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/test/resources/spring/root-context.xml" })
@@ -114,12 +114,23 @@ public class AssessmentVariableSrviceTest {
 		//System.out.println(avTableToList(t).toString());
 		assertEquals(7816, avService.getAssessmentAllVars(true, false).size());
 	}
-	
+    
+    @Ignore
 	@Test
 	public void testAskFormulasFor()
 	{
 		assertEquals(2,avService.askFormulasFor(16).size());
 		assertEquals(2,avService.askFormulasFor(16).size());
+	}
+	
+	@Test
+	public void testAssessmentVariables()
+	{
+		avRepo.findOne(3);
+		avRepo.findOne(2);
+		avRepo.findOne(3);
+
+		//avRepo.findAvs();
 	}
 	
 

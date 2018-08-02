@@ -18,7 +18,7 @@ public class AssessmentVariableRepositoryImpl extends AbstractHibernateRepositor
     public List<AssessmentVariable> findAllFormulae() {
         String sql = "FROM AssessmentVariable av where av.assessmentVariableTypeId=4";
         return entityManager
-                .createQuery(sql, AssessmentVariable.class)
+                .createQuery(sql, AssessmentVariable.class).setHint("org.hibernate.cacheable", true)
                 .getResultList();
     }
 

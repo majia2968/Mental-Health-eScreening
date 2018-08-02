@@ -35,6 +35,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -43,6 +45,8 @@ import com.google.common.collect.Maps;
  */
 @Entity
 @Table(name = "assessment_variable")
+//@Cacheable()
+//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = "AssessmentVariable.findAll", query = "SELECT a FROM AssessmentVariable a")})
 public class AssessmentVariable implements Serializable {

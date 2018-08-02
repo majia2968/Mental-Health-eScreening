@@ -16,7 +16,11 @@
 
 	<context:property-placeholder location="classpath:app-settings.properties" system-properties-mode="OVERRIDE" />
 	<cache:annotation-driven />
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+	<!-- It will use ehcache.xml under src/main/resources -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="ehcache"/>
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="ehcache.xml" p:shared="true"/>
+	<!--  SimpleCacheManager is for spring cache config example, no ehcache involve.
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
        <property name="caches">
            <set>
                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
@@ -27,7 +31,8 @@
                </bean>
            </set>
        </property>
-    </bean>
+    </bean> 
+    -->
     <jpa:repositories base-package="gov.va.escreening.repository"/>
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="mainDataSource" />

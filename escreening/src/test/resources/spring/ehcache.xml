@@ -65,8 +65,8 @@ xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
         timeToLiveSeconds="600"
         overflowToDisk="true"
         />
-
-    <!-- Sample cache named sampleCache2
+<!-- 	<cache name="gov.va.escreening.entity.AssessmentVariable" maxElementsInMemory="1000" />
+ -->    <!-- Sample cache named sampleCache2
         This cache contains 1000 elements. Elements will always be held in memory.
         They are not expired. -->
     <cache name="sampleCache2"
