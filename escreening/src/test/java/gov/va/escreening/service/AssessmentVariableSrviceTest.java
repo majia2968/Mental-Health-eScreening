@@ -126,10 +126,11 @@ public class AssessmentVariableSrviceTest {
 	@Test
 	public void testAssessmentVariables()
 	{
-		avRepo.findOne(3);
-		avRepo.findOne(2);
-		avRepo.findOne(3);
-
+		//avRepo.findOne(3);
+		//avRepo.findOne(2);
+		//avRepo.findOne(3);
+        Collection<AssessmentVariable> avList = avr.findAvs();
+        Collection<AssessmentVariable> avList1 = avr.findAvs();
 		//avRepo.findAvs();
 	}
 	
