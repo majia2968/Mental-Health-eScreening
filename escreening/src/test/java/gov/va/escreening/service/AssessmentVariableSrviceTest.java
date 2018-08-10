@@ -28,9 +28,12 @@ import gov.va.escreening.controller.dashboard.ExportDataRestController;
 import gov.va.escreening.delegate.AssessmentDelegate;
 import gov.va.escreening.domain.ExportTypeEnum;
 import gov.va.escreening.dto.dashboard.AssessmentDataExport;
+import gov.va.escreening.entity.AssessmentFormula;
+import gov.va.escreening.entity.AssessmentVarChildren;
 import gov.va.escreening.entity.AssessmentVariable;
 import gov.va.escreening.entity.Event;
 import gov.va.escreening.entity.Measure;
+import gov.va.escreening.entity.VariableTemplate;
 import gov.va.escreening.expressionevaluator.ExpressionEvaluatorService;
 import gov.va.escreening.form.ExportDataFormBean;
 import gov.va.escreening.repository.AssessmentVariableRepository;
@@ -115,23 +118,35 @@ public class AssessmentVariableSrviceTest {
 		assertEquals(7816, avService.getAssessmentAllVars(true, false).size());
 	}
     
-    @Ignore
+    //@Ignore
 	@Test
 	public void testAskFormulasFor()
 	{
-		assertEquals(2,avService.askFormulasFor(16).size());
-		assertEquals(2,avService.askFormulasFor(16).size());
+		assertEquals(5,avService.askFormulasFor(16).size());
+		//assertEquals(2,avService.askFormulasFor(16).size());
 	}
 	
 	@Test
+	@Transactional
 	public void testAssessmentVariables()
 	{
-		//avRepo.findOne(3);
-		//avRepo.findOne(2);
-		//avRepo.findOne(3);
-        Collection<AssessmentVariable> avList = avr.findAvs();
-        Collection<AssessmentVariable> avList1 = avr.findAvs();
-		//avRepo.findAvs();
+
+       // Collection<AssessmentVariable> avList = avr.findAvs();
+        Collection<AssessmentVariable> avList = avr.findAll();
+        List<AssessmentVarChildren> assessmentVarChildrenList;
+        for (AssessmentVariable av : avList) {
+        	//av.getDescription();
+        	assessmentVarChildrenList = av.getAssessmentVarChildrenList();
+        	for (AssessmentVarChildren af : assessmentVarChildrenList) {
+        		//System.out.println(af.getAssessmentVarChildrenId());
+        		//af.getAssessmentVarChildrenId();
+        	}
+        	//assessmentVarChildrenList = av.getAssessmentVarChildrenList();
+        	
+        			//assessmentFormulas.get(1);
+        }
+
+        //avRepo.findAvs();
 	}
 	
 

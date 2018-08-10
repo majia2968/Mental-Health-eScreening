@@ -16,7 +16,9 @@ public class AssessmentVariableRepositoryImpl extends AbstractHibernateRepositor
 
     @Override
     public List<AssessmentVariable> findAllFormulae() {
-        String sql = "FROM AssessmentVariable av where av.assessmentVariableTypeId=4";
+        String sql = "select distinct a FROM AssessmentVariable a left JOIN fetch a.assessmentVarChildrenList " +
+				"left join fetch a.measureAnswer";
+        //String sql = "FROM AssessmentVariable av where av.assessmentVariableTypeId=4";
         return entityManager
                 .createQuery(sql, AssessmentVariable.class).setHint("org.hibernate.cacheable", true)
                 .getResultList();

@@ -172,14 +172,13 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 		} else {
 			for (AssessmentVarChildren avc : av.getAssessmentVarChildrenList()) {
 				return compareMeasureAnswer(avc.getVariableChild(), m);
-			}
+			} 
 		}
 		return false;
 	}
 
 	@Override
     @Transactional(readOnly = true)
-	@Cacheable("formulas")
     public List<Map<String, String>> askFormulasFor(Integer moduleId) {
         Survey survey = sr.findOne(moduleId);
 		Collection<Measure> measures = Lists.newArrayList();
@@ -189,7 +188,7 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
         Set<String> avUsed = Sets.newHashSet();
         Set<List<String>> formulaColumnsSet = Sets.newLinkedHashSet();
         AvBuilder<Set<List<String>>> fbBldr = new FormulaColumnsBldr(formulaColumnsSet, avUsed, this);
-        filterBySurvey(survey, fbBldr, measures, allFormulas, true, false);
+        //filterBySurveyFormula(survey, fbBldr, measures, allFormulas, true, false);
 
         List<Map<String, String>> formulas = Lists.newArrayList();
         for (List<String> formulaColumns : fbBldr.getResult()) {
@@ -203,6 +202,35 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
         }
         return formulas;
     }
+	
+	
+    public void filterBySurveyFormula(Survey survey, AvBuilder<?> avBldr,
+                               Collection<Measure> smList, Collection<AssessmentVariable> avList,
+                               boolean useFilteredMeasures, boolean includeFormulaTokens) {
+		
+		boolean ignoreAnswers=useFilteredMeasures;
+		Collection<Measure>filteredMeasures = null;
+		if(useFilteredMeasures){
+			filteredMeasures = filterMeasures(smList, filterMeasureTypes);
+		}
+		
+		for (AssessmentVariable av : avList) {
+			//handleFormulaType(survey, av, smList, avBldr, avList, ignoreAnswers);
+	        for (Measure m : smList) {
+//	            for (AssessmentVarChildren avc : av.getAssessmentVarChildrenList()) {
+//	                AssessmentVariable av1 = avc.getVariableChild();
+//	                if (compareMeasure(av1, m)) {
+//	                    //buildFromMeasure(av, avc, m);
+//	                } else if (compareMeasureAnswer(av1, m)) {
+//	                    //buildFromMeasureAnswer(av, avc, m, av1.getMeasureAnswer());
+//	                }
+//	            }
+	            if (!m.getChildren().isEmpty()) {
+	            	//filterBySurveyFormula(survey, this, m.getChildren(), avList, filterMeasures, false);
+	            }
+	        }
+		}
+	}
 
     @Override
     public String getPlainText(String htmlText) {
