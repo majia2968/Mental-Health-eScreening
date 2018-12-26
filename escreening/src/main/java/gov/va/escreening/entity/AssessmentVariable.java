@@ -45,8 +45,8 @@ import com.google.common.collect.Maps;
  */
 @Entity
 @Table(name = "assessment_variable")
-//@Cacheable()
-//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable()
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({
         @NamedQuery(name = "AssessmentVariable.findAll", query = "SELECT a FROM AssessmentVariable a")})
 public class AssessmentVariable implements Serializable {

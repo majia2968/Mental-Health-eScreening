@@ -1,0 +1,1 @@
+RESTORE DATABASE [sdc-prod] FROM DISK = N'/usr/src/app/sdc-prod-2018724-15-57-30.bak' WITH FILE = 1, NOUNLOAD, REPLACE, STATS = 5

@@ -215,16 +215,16 @@ public class AssessmentVariableSrviceImpl implements AssessmentVariableService {
 		}
 		
 		for (AssessmentVariable av : avList) {
-			//handleFormulaType(survey, av, smList, avBldr, avList, ignoreAnswers);
+			handleFormulaType(survey, av, smList, avBldr, avList, ignoreAnswers);
 	        for (Measure m : smList) {
-//	            for (AssessmentVarChildren avc : av.getAssessmentVarChildrenList()) {
-//	                AssessmentVariable av1 = avc.getVariableChild();
-//	                if (compareMeasure(av1, m)) {
-//	                    //buildFromMeasure(av, avc, m);
-//	                } else if (compareMeasureAnswer(av1, m)) {
-//	                    //buildFromMeasureAnswer(av, avc, m, av1.getMeasureAnswer());
-//	                }
-//	            }
+	            for (AssessmentVarChildren avc : av.getAssessmentVarChildrenList()) {
+	                AssessmentVariable av1 = avc.getVariableChild();
+	                if (compareMeasure(av1, m)) {
+	                    //buildFromMeasure(av, avc, m);
+	                } else if (compareMeasureAnswer(av1, m)) {
+	                    //buildFromMeasureAnswer(av, avc, m, av1.getMeasureAnswer());
+	                }
+	            }
 	            if (!m.getChildren().isEmpty()) {
 	            	//filterBySurveyFormula(survey, this, m.getChildren(), avList, filterMeasures, false);
 	            }
