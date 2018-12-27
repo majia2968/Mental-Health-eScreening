@@ -1,3 +1,4 @@
+FROM tomcat:latest
 # Format: FROM    repository[:version]
 #FROM app2.vaftl.us/vamis/centos7-jdk8-tomcat
 #FROM tomcat:jre8
@@ -10,7 +11,7 @@ MAINTAINER WMSS Developer <wmss@longviewinc.com>
 
 # ----- Set default tomcat configuration -----
 
-COPY ../target/escreening-1.0.0-BUILD-SNAPSHOT.war $CATALINA_HOME/webapps/escreening.war
+COPY ./target/escreening-1.0.0-BUILD-SNAPSHOT.war $CATALINA_HOME/webapps/escreening.war
 
 WORKDIR $CATALINA_HOME/bin
 

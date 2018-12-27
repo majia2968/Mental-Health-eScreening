@@ -22,11 +22,11 @@ services:
       SA_PASSWORD: Password12345678
 
   tomcat:
-    image: tomcat:latest
+    #image: tomcat:latest
     #container_name: kickass_euler
-    #build: ./docker/tomcat
+    build: .
     volumes:
-      - ./target/escreening-1.0.0-BUILD-SNAPSHOT.war:/usr/local/tomcat/webapps/escreening.war
+      #- ./target/escreening-1.0.0-BUILD-SNAPSHOT.war:/usr/local/tomcat/webapps/escreening.war
       - ./nextgen/sqljdbc4-4.2.jar:/usr/local/tomcat/lib/sqljdbc4-4.2.jar
     ports:
       - 8080:8080
